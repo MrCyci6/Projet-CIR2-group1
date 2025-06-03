@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <link href="styles/recherche.css" rel="stylesheet" />
+  <title>Recherche Installation</title>
+</head>
+<body>
+    <header>
+            <img id="logo" src="./styles/ressources/logo.png" alt="logo" >
+            <div class="menutexts">
+                <a href="index.html">Accueil</a>
+                <a href="recherche.html">Recherches</a>
+                <a href="carte.html">Carte</a>
+            </div>
+        </header>
+
+
+  <h1>Recherche d'Installations</h1>
+
+  <div class="filters">
+    <select id="marqueOnduleur">
+      <option value="">Marque de l'onduleur</option>
+    </select>
+
+    <select id="marquePanneaux">
+      <option value="">Marque des panneaux</option>
+    </select>
+
+    <select id="departement">
+      <option value="">Département</option>
+    </select>
+  </div>
+
+  <table id="resultTable">
+    <thead>
+      <tr>
+        <th>Date d'installation</th>
+        <th>Nombre de panneaux</th>
+        <th>Surface (m²)</th>
+        <th>Puissance crête (kWc)</th>
+        <th>Localisation</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <!-- Résultats ici -->
+    </tbody>
+  </table>
+<br>
+<br>
+<br>
+<br>
+
+  <footer>
+            <div id="container">
+                <div id="footer-part1">
+                    <p>Groupe 1 - CIR2 - 2025</p>
+                </div>
+                <div id="footer-part2">
+                    <div class="blazes">
+                        <p>Lecaillon Blot</p>
+                        <p>Romain</p>
+                    </div>
+                    <div class="blazes">
+                        <p>Le Mouel</p>
+                        <p>Madeg</p>
+                    </div>
+                    <div class="blazes">
+                        <p>Lenoir</p>
+                        <p>Cyriac</p>
+                    </div>
+                </div>
+            </div>
+        </footer>    
+
+
+    <!-- Scripts -->
+   <script src="styles/recherche.js"></script>
+</body>
+</html>

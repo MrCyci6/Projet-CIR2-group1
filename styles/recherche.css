@@ -1,0 +1,122 @@
+ body {
+      font-family: Arial, sans-serif;
+      padding: 0px;
+      margin: 0px;
+      background: #f7f7f7;
+    }
+
+    h1 {
+      text-align: center;
+    }
+
+    .filters {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+      margin-bottom: 20px;
+      justify-content: center;
+    }
+
+    select {
+      padding: 8px;
+      font-size: 16px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      background: #fff;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+
+    th, td {
+      padding: 12px;
+      border: 1px solid #ddd;
+      text-align: center;
+    }
+
+    th {
+      background-color: #f0f0f0;
+    }
+
+    a {
+      color: blue;
+      text-decoration: underline;
+    }
+
+
+    /* Header / Footer */
+header{
+    width: auto;
+    height: 92px;
+    background-color: #489e69;
+    display: flex;
+    flex-direction:row ;
+    justify-content: space-between;
+}
+
+.menutexts{
+    padding-right: 5%;
+    display: grid;
+    grid-template-columns: auto auto auto;
+    gap: 1.5em;
+    align-items: center;
+    
+}
+
+.menutexts > a{
+    text-decoration: none;
+    color: black;
+    font-size: 1.35em;
+}
+
+
+#logo{
+    height: inherit;
+    position: inherit;
+    padding-left: 1%;
+}
+
+
+footer{
+    background-color: #489e69;
+    position: relative;
+    bottom: 0%;
+    width: 100%;
+    height: auto;
+}
+
+#container{
+    display: grid;
+    grid-template-rows: 2.5fr 4fr;
+}
+
+#footer-part1{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-bottom: 1.5px whitesmoke solid;
+    margin-left: 2%;
+    margin-right: 2%;
+}
+
+#footer-part2{
+    display: flex;
+    justify-content: space-evenly;
+    border-left: 0.75px whitesmoke solid;
+    border-right: 0.75px whitesmoke solid;
+    margin-top: 2%;
+    margin-bottom: 2%;
+}
+
+.blazes{
+    display: grid;
+    grid-template-rows: 2em 2em ;
+    align-self: center;
+    align-items: center;
+    justify-items: center;
+}
+
+.blazes > p{
+    font-size: 1.2rem;
+}
