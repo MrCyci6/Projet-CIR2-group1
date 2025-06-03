@@ -1,0 +1,15 @@
+body{
+    padding: 0;
+    margin: 0;
+
+}
+
+header{
+    width: 1fr;
+    height: 92px;
+    background-color: #489e69;
+}
+
+#logo{
+    height: inherit;
+}
