@@ -6,7 +6,7 @@ body{
 }
 
 header{
-    width: 1fr;
+    width: auto;
     height: 92px;
     background-color: #489e69;
     display: flex;
@@ -32,11 +32,12 @@ header{
 
 #logo{
     height: inherit;
+    position: inherit;
+    padding-left: 1%;
 }
 
 
 footer{
-    height: 150px;
     background-color: #489e69;
     position: absolute;
     bottom: 0%;
@@ -46,18 +47,25 @@ footer{
 
 #container{
     display: grid;
-    grid-template-rows: 2fr 4fr;
+    grid-template-rows: 2.5fr 4fr;
 }
 
 #footer-part1{
     display: flex;
     justify-content: center;
     align-items: center;
+    border-bottom: 1.5px whitesmoke solid;
+    margin-left: 2%;
+    margin-right: 2%;
 }
 
 #footer-part2{
     display: flex;
     justify-content: space-evenly;
+    border-left: 0.75px whitesmoke solid;
+    border-right: 0.75px whitesmoke solid;
+    margin-top: 2%;
+    margin-bottom: 2%;
 }
 
 .blazes{
@@ -66,4 +74,8 @@ footer{
     align-self: center;
     align-items: center;
     justify-items: center;
+}
+
+.blazes > p{
+    font-size: 1.2rem;
 }
