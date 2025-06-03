@@ -1,6 +1,7 @@
 body{
     padding: 0;
     margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
 
 }
 
@@ -8,8 +9,61 @@ header{
     width: 1fr;
     height: 92px;
     background-color: #489e69;
+    display: flex;
+    flex-direction:row ;
+    justify-content: space-between;
 }
+
+.menutexts{
+    padding-right: 5%;
+    display: grid;
+    grid-template-columns: auto auto auto;
+    gap: 1.5em;
+    align-items: center;
+    
+}
+
+.menutexts > a{
+    text-decoration: none;
+    color: black;
+    font-size: 1.35em;
+}
+
 
 #logo{
     height: inherit;
+}
+
+
+footer{
+    height: 150px;
+    background-color: #489e69;
+    position: absolute;
+    bottom: 0%;
+    width: 100%;
+    height: auto;
+}
+
+#container{
+    display: grid;
+    grid-template-rows: 2fr 4fr;
+}
+
+#footer-part1{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#footer-part2{
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.blazes{
+    display: grid;
+    grid-template-rows: 2em 2em ;
+    align-self: center;
+    align-items: center;
+    justify-items: center;
 }
