@@ -54,23 +54,32 @@ const installations = [
   { id: 30, date: "01/2024", nbPanneaux: 17, surface: 41, puissance: 5.1, localisation: "Tours (37)", marqueOnduleur: "APSystems", marquePanneaux: "First Solar" }
 ];
 
-    function afficherResultats(data) {
-      const tbody = document.querySelector("#resultTable tbody");
-      tbody.innerHTML = "";
+function afficherResultats(data) {
+  const tbody = document.getElementById("resultTableBody");
+  tbody.innerHTML = "";
 
-      data.forEach(item => {
-        const row = document.createElement("tr");
-        row.innerHTML = `
-          <td>${item.date}</td>
-          <td>${item.nbPanneaux}</td>
-          <td>${item.surface}</td>
-          <td>${item.puissance}</td>
-          <td>${item.localisation}</td>
-          <td><a href="details.html?id=${item.id}">Détails</a></td>
-        `;
-        tbody.appendChild(row);
-      });
-    }
+  data.forEach(item => {
+    const row = document.createElement("tr");
+    row.innerHTML = `
+      <td>${item.date}</td>
+      <td class="text-center">${item.nbPanneaux}</td>
+      <td class="text-center">${item.surface}</td>
+      <td class="text-center">${item.puissance}</td>
+      <td>${item.localisation}</td>
+      <td class="text-center">
+        <a href="details.html?id=${item.id}" class="button">
+          Détails
+          <svg class="button-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+            <polyline points="15 3 21 3 21 9"></polyline>
+            <line x1="10" y1="14" x2="21" y2="3"></line>
+          </svg>
+        </a>
+      </td>
+    `;
+    tbody.appendChild(row);
+  });
+}
 
     afficherResultats(installations); // affichage initial
 

@@ -1,11 +1,17 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8">
-  <title>Détails de l'installation</title>
-  <link rel="stylesheet" href="styles/details.css">
+  <meta charset="UTF-8" />
+  <title>Carte des Installations</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+  <!-- Leaflet CSS -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <link href="styles/carte.css" rel="stylesheet" />
+
 </head>
 <body>
+
    <header>
             <img id="logo" src="./styles/ressources/logo.png" alt="logo" >
             <div class="menutexts">
@@ -14,22 +20,25 @@
                 <a href="carte.html">Carte</a>
             </div>
   </header>
-<br>
-<br>
-<br>
-<br>
 
-<h1>Détails de l'installation</h1>
 
-<div class="details" id="detailsContainer">
-  Chargement...
-</div>
-<br>
-<br>
-<br>
-<br>
+  <h1>Carte des Installations Solaires</h1>
+  <div class="container">
+    <div class="filters">
+      <select id="annee">
+        <option value="">Année d'installation</option>
+      </select>
 
-<footer>
+      <select id="departement">
+        <option value="">Département</option>
+      </select>
+    </div>
+
+    <div id="map"></div>
+  </div>
+
+
+  <footer>
             <div id="container">
                 <div id="footer-part1">
                     <p>Groupe 1 - CIR2 - 2025</p>
@@ -49,8 +58,11 @@
                     </div>
                 </div>
             </div>
-</footer>    
+        </footer>
 
-<script src="styles/details.js"></script>
+  <!-- Leaflet JS -->
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script src="styles/carte.js"></script>
+
 </body>
 </html>
