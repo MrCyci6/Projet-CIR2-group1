@@ -1825,3 +1825,55 @@ footer {
 .blazes:hover {
   transform: scale(1.1);
 }
+
+body.dark-mode {
+  background: #181c1f;
+  color: #e0e0e0;
+}
+
+body.dark-mode header,
+body.dark-mode footer,
+body.dark-mode .romain {
+  background-color: #222 !important;
+  color: #e0e0e0;
+}
+
+body.dark-mode .menutexts > a {
+  color: #e0e0e0;
+}
+
+body.dark-mode .menutexts > a:hover {
+  color: #8fd19e;
+}
+
+body.dark-mode h1,
+body.dark-mode h2,
+body.dark-mode h3,
+body.dark-mode h4,
+body.dark-mode h5,
+body.dark-mode h6 {
+  color: #fff;
+}
+
+body.dark-mode,
+body.dark-mode .page-section,
+body.dark-mode,
+body.dark-mode #portfolio .portfolio-caption {
+  background: #23272b !important;
+  color: #e0e0e0 !important;
+}
+
+body.dark-mode .portfolio-caption-heading,
+body.dark-mode .section-heading {
+  color: #8fd19e !important;
+}
+
+body.dark-mode .btn-primary {
+  background-color: #489e69 !important;
+  border-color: #489e69 !important;
+  color: #fff !important;
+}
+
+body.dark-mode .blazes > p {
+  color: #e0e0e0;
+}

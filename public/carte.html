@@ -30,7 +30,7 @@
 
     <h1>Carte des Installations Solaires</h1>
     <div class="container">
-      <div class="filters">
+      <!-- <div class="filters">
         <select id="annee">
           <option value="">Année d'installation</option>
         </select>
@@ -38,6 +38,26 @@
         <select id="departement">
           <option value="">Département</option>
         </select>
+      </div> -->
+
+      <div class="filters">
+        <h2 class="filters-title">
+          <i class="fa-solid fa-filter"></i> Filtres de recherche
+        </h2>
+        <div class="filters-controls">
+          <div class="filter-group">
+            <label for="annee">Année d'installation</label>
+            <select id="annee">
+              <option value="">Toutes les années</option>
+            </select>
+          </div>
+          <div class="filter-group">
+            <label for="departement">Département</label>
+            <select id="departement">
+              <option value="">Tous les départements</option>
+            </select>
+          </div>
+        </div>
       </div>
 
       <div id="map"></div>

@@ -55,6 +55,19 @@ h1 {
   font-size: 16px;
 }
 
+.filters-title {
+  align-self: flex-start;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 0;
+  margin-bottom: 18px;
+  font-size: 1.3em;
+  color: #489e69;
+  font-weight: bold;
+  letter-spacing: 1px;
+}
+
 select {
   padding: 8px;
   font-size: 16px;
@@ -290,5 +303,67 @@ tr:hover {
 .pagination-btn:hover,
 .pagination-btn[style*="bold"] {
   background: #489e69;
+  color: #fff;
+}
+
+/* Mode nuit */
+
+body.dark-mode {
+  background: #181c1f;
+  color: #e0e0e0;
+}
+
+body.dark-mode .filters,
+body.dark-mode .table-container {
+  background: #23272b;
+  color: #e0e0e0;
+  border-color: #222;
+}
+
+body.dark-mode .filters-title {
+  color: #8fd19e;
+}
+
+body.dark-mode .filter-group label {
+  color: #8fd19e;
+}
+
+body.dark-mode select,
+body.dark-mode .filter-group select {
+  background: #23272b;
+  color: #e0e0e0;
+  border: 1px solid #444;
+}
+
+body.dark-mode table,
+body.dark-mode th,
+body.dark-mode td {
+  background: #23272b;
+  color: #e0e0e0;
+}
+
+body.dark-mode th {
+  color: #8fd19e;
+}
+
+body.dark-mode tr:hover {
+  background-color: #222;
+}
+
+body.dark-mode header,
+body.dark-mode footer {
+  background-color: #222;
+  color: #e0e0e0;
+}
+
+body.dark-mode .menutexts > a {
+  color: #e0e0e0;
+}
+
+body.dark-mode .menutexts > a:hover {
+  color: #8fd19e;
+}
+
+body.dark-mode h1 {
   color: #fff;
 }
