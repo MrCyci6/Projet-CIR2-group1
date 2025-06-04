@@ -14,11 +14,11 @@
                 return false;
             }
             
-            return $result;
+            return $result["total"];
         }
 
         public static function getPageNumber(int $rows) {           
-            return ceil(Installateur::getCount()["total"]/$rows);
+            return ceil(Installateur::getCount()/$rows);
         }
 
         public static function getAll(int $page, int $rows) {
@@ -79,10 +79,6 @@
             }
             
             return true;
-        }
-
-        public static function getStats() {
-
         }
     }
 

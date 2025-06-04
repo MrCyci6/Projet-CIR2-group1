@@ -2,15 +2,25 @@
 
     $ressource = array_shift($request);
     if(isset($ressource) && $ressource == "stats") {
+        $total = Panneau::getCount();
+        $marqueTotal = Panneau::getMarqueCount();
+        $modeleTotal = Panneau::getModeleCount();
+
+        sendData("{
+            \"success\": true,
+            \"total\": $total,
+            \"marque\": $marqueTotal,
+            \"modele\": $modeleTotal
+        }", 200);
 
         exit();
     }
 
-    // Specific Onduleur
+    // Specific panneau
     if(isset($_GET['id']) && !empty($_GET['id'])) {
         $id = intval($_GET['id']);
         
-        $data = Onduleur::get($id);
+        $data = Panneau::get($id);
         if(!is_array($data) && !$data) {
             sendData("{\"success\": false, \"message\": \"Internal Server Error\"}", 500);
             exit();
@@ -20,18 +30,18 @@
         exit();
     }
 
-    // All Onduleur
+    // All panneau
     $rows = $_GET['rows'] ?? DEFAULT_ROWS;
     $page = $_GET['page'] ?? 1;
 
-    $data = Onduleur::getAll($page, $rows);
+    $data = Panneau::getAll($page, $rows);
     if(!is_array($data) && !$data) {
         sendData("{\"success\": false, \"message\": \"Internal Server Error\"}", 500);
         exit();
     }
 
-    $total = Onduleur::getCount()["total"] ?? 0;
-    $pages = Onduleur::getPageNumber($rows) ?? 1;
+    $total = Panneau::getCount()["total"] ?? 0;
+    $pages = Panneau::getPageNumber($rows) ?? 1;
 
     sendData("{\"success\": true, \"total\": $total, \"pages\": $pages, \"per_page\": $rows, \"data\": ".json_encode($data)."}", 200);
 ?>

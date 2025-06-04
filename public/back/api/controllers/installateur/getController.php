@@ -2,7 +2,9 @@
 
     $ressource = array_shift($request);
     if(isset($ressource) && $ressource == "stats") {
+        $total = Installateur::getCount();
 
+        sendData("{\"success\": true, \"total\": $total}", 200);
         exit();
     }
 
@@ -15,7 +17,7 @@
         exit();
     }
 
-    $total = Installateur::getCount()["total"] ?? 0;
+    $total = Installateur::getCount() ?? 0;
     $pages = Installateur::getPageNumber($rows) ?? 1;
 
     sendData("{\"success\": true, \"total\": $total, \"pages\": $pages, \"per_page\": $rows, \"data\": ".json_encode($data)."}", 200);
