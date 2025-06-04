@@ -1,4 +1,4 @@
- body {
+body {
       font-family: -apple-system, BlinkMacSystemFont, "Segoe UI";
       padding: 0px;
       margin: 0px;
@@ -192,7 +192,7 @@ body {
     transition: all 0.3s ease;
     max-width: 1200px;      /* Limite la largeur du tableau */
     margin: 40px auto;     /* Centre le tableau et ajoute de l'espace autour */
-    width: 100%;           /* Pour qu'il prenne toute la largeur jusqu'à max-width */
+    width: 100%;           /*Pour qu'il prenne toute la largeur jusqu'à max-width */
 }
 
 .table-container:hover {
@@ -267,3 +267,32 @@ tr:hover {
     width: 14px;
     height: 14px;
 }
+
+#pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  margin: 24px 0;
+}
+
+.pagination-btn {
+  background: #e8e9e9;
+  border: 1px solid #489e69;
+  color: #489e69;
+  border-radius: 4px;
+  padding: 6px 12px;
+  margin: 0 2px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.pagination-btn:hover,
+.pagination-btn[style*="bold"] {
+  background: #489e69;
+  color: #fff;
+}
+
+
+
+
+

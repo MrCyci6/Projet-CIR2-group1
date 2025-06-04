@@ -54,11 +54,22 @@ const installations = [
   { id: 30, date: "01/2024", nbPanneaux: 17, surface: 41, puissance: 5.1, localisation: "Tours (37)", marqueOnduleur: "APSystems", marquePanneaux: "First Solar" }
 ];
 
-function afficherResultats(data) {
+
+
+let currentPage = 1;
+const resultsPerPage = 10;
+let currentData = installations.slice(); // Copie initiale
+
+function afficherResultats(data, page = 1) {
   const tbody = document.getElementById("resultTableBody");
   tbody.innerHTML = "";
 
-  data.forEach(item => {
+  // Pagination
+  const start = (page - 1) * resultsPerPage;
+  const end = start + resultsPerPage;
+  const pageData = data.slice(start, end);
+
+  pageData.forEach(item => {
     const row = document.createElement("tr");
     row.innerHTML = `
       <td>${item.date}</td>
@@ -79,24 +90,47 @@ function afficherResultats(data) {
     `;
     tbody.appendChild(row);
   });
+
+  afficherPagination(data.length, page);
 }
 
-    afficherResultats(installations); // affichage initial
+function afficherPagination(total, page) {
+  const pagination = document.getElementById("pagination");
+  pagination.innerHTML = "";
+  const totalPages = Math.ceil(total / resultsPerPage);
 
-    // Gestion des filtres
-    const selects = document.querySelectorAll("select");
-    selects.forEach(select => {
-      select.addEventListener("change", () => {
-        const filtreOnduleur = document.getElementById("marqueOnduleur").value;
-        const filtrePanneaux = document.getElementById("marquePanneaux").value;
-        const filtreDepartement = document.getElementById("departement").value;
+  if (totalPages <= 1) return;
 
-        const filtres = installations.filter(item => {
-          return (!filtreOnduleur || item.marqueOnduleur === filtreOnduleur) &&
-                 (!filtrePanneaux || item.marquePanneaux === filtrePanneaux) &&
-                 (!filtreDepartement || item.localisation.includes(`(${filtreDepartement})`));
-        });
-
-        afficherResultats(filtres);
-      });
+  for (let i = 1; i <= totalPages; i++) {
+    const btn = document.createElement("button");
+    btn.textContent = i;
+    btn.className = "pagination-btn";
+    if (i === page) btn.style.fontWeight = "bold";
+    btn.addEventListener("click", () => {
+      currentPage = i;
+      afficherResultats(currentData, currentPage);
     });
+    pagination.appendChild(btn);
+  }
+}
+
+// Initial display
+afficherResultats(installations, 1);
+
+// Gestion des filtres
+const selectes = document.querySelectorAll("select");
+selectes.forEach(select => {
+  select.addEventListener("change", () => {
+    const filtreOnduleur = document.getElementById("marqueOnduleur").value;
+    const filtrePanneaux = document.getElementById("marquePanneaux").value;
+    const filtreDepartement = document.getElementById("departement").value;
+
+    currentData = installations.filter(item => {
+      return (!filtreOnduleur || item.marqueOnduleur === filtreOnduleur) &&
+             (!filtrePanneaux || item.marquePanneaux === filtrePanneaux) &&
+             (!filtreDepartement || item.localisation.includes(`(${filtreDepartement})`));
+    });
+    currentPage = 1;
+    afficherResultats(currentData, currentPage);
+  });
+});
