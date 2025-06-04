@@ -2,7 +2,29 @@
 
     $ressource = array_shift($request);
     if(isset($ressource) && $ressource == "stats") {
+        $surfaceTotal = Installation::getSurfaceTotal(); // m²
+        $productionTotal = Installation::getProductionTotal(); // kWh
+        $puissanceTotal = Installation::getPuissanceTotal(); // kWc
+        
+        $surfaceAverage = Installation::getSurfaceAverage(); // m²
+        $productionAverage = Installation::getProductionAverage(); // kWh
+        $puissanceAverage = Installation::getPuissanceAverage(); // kWc
 
+        sendData("{
+            \"success\": true, 
+            \"surface_m2\": {
+                \"total\": $surfaceTotal, 
+                \"average\": $surfaceAverage
+            }, 
+            \"production_kwh\": {
+                \"total\": $productionTotal, 
+                \"average\": $productionAverage
+            }, 
+            \"puissance_kwc\": {
+                \"total\": $puissanceTotal, 
+                \"average\": $puissanceAverage
+            }
+        }", 200);
         exit();
     }else if(isset($ressource) && $ressource == "search") {
         $page = $_GET['page'] ?? 1;

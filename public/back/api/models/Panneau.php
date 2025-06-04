@@ -18,6 +18,38 @@
             }
             
             return $result;
+        }        
+        
+        public static function getModeleCount() {
+            try {
+                $statement = Database::preparedQuery(
+                    "SELECT COUNT(*) AS total FROM panneau_modele;",
+                    []
+                );
+
+                $result = $statement->fetch();
+            } catch (PDOException $exception) {
+                error_log('Request error: '.$exception->getMessage());
+                return false;
+            }
+            
+            return $result["total"];
+        }
+
+        public static function getMarqueCount() {
+            try {
+                $statement = Database::preparedQuery(
+                    "SELECT COUNT(DISTINCT id_marque) AS total FROM panneau;",
+                    []
+                );
+
+                $result = $statement->fetch();
+            } catch (PDOException $exception) {
+                error_log('Request error: '.$exception->getMessage());
+                return false;
+            }
+            
+            return $result["total"];
         }
 
         public static function getCount() {
@@ -33,11 +65,11 @@
                 return false;
             }
             
-            return $result;
+            return $result["total"];
         }
 
         public static function getPageNumber(int $rows) {           
-            return ceil(Panneau::getCount()["total"]/$rows);
+            return ceil(Panneau::getCount()/$rows);
         }
 
         public static function getAll(int $page, int $rows) {

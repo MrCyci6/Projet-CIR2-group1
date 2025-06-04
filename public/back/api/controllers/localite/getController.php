@@ -2,7 +2,18 @@
 
     $ressource = array_shift($request);
     if(isset($ressource) && $ressource == "stats") {
+        $total = Localite::getCount();
+        $regionTotal = Localite::getRegionCount();
+        $departementTotal = Localite::getDepartementCount();
+        $paysTotal = Localite::getPaysCount();
 
+        sendData("{
+            \"success\": true,
+            \"localite\": $total,
+            \"region\": $regionTotal,
+            \"departement\": $departementTotal,
+            \"pays\": $paysTotal
+        }", 200);
         exit();
     }
 

@@ -21,6 +21,54 @@
             return $result;
         }
 
+        public static function getPaysCount() {
+            try {
+                $statement = Database::preparedQuery(
+                    "SELECT COUNT(*) as total FROM pays;",
+                    []
+                );
+
+                $result = $statement->fetch();
+            } catch (PDOException $exception) {
+                error_log('Request error: '.$exception->getMessage());
+                return false;
+            }
+            
+            return $result["total"];
+        }
+
+        public static function getDepartementCount() {
+            try {
+                $statement = Database::preparedQuery(
+                    "SELECT COUNT(*) as total FROM departement;",
+                    []
+                );
+
+                $result = $statement->fetch();
+            } catch (PDOException $exception) {
+                error_log('Request error: '.$exception->getMessage());
+                return false;
+            }
+            
+            return $result["total"];
+        }
+
+        public static function getRegionCount() {
+            try {
+                $statement = Database::preparedQuery(
+                    "SELECT COUNT(*) as total FROM region;",
+                    []
+                );
+
+                $result = $statement->fetch();
+            } catch (PDOException $exception) {
+                error_log('Request error: '.$exception->getMessage());
+                return false;
+            }
+            
+            return $result["total"];
+        }
+
         public static function getCount() {
             try {
                 $statement = Database::preparedQuery(
@@ -34,11 +82,11 @@
                 return false;
             }
             
-            return $result;
+            return $result["total"];
         }
 
         public static function getPageNumber(int $rows) {           
-            return ceil(Localite::getCount()["total"]/$rows);
+            return ceil(Localite::getCount()/$rows);
         }
 
         public static function getAll(int $page, int $rows) {

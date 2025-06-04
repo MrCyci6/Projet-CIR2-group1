@@ -20,6 +20,38 @@
             return $result;
         }
 
+        public static function getModeleCount() {
+            try {
+                $statement = Database::preparedQuery(
+                    "SELECT COUNT(*) AS total FROM onduleur_modele;",
+                    []
+                );
+
+                $result = $statement->fetch();
+            } catch (PDOException $exception) {
+                error_log('Request error: '.$exception->getMessage());
+                return false;
+            }
+            
+            return $result["total"];
+        }
+
+        public static function getMarqueCount() {
+            try {
+                $statement = Database::preparedQuery(
+                    "SELECT COUNT(DISTINCT id_marque) AS total FROM onduleur;",
+                    []
+                );
+
+                $result = $statement->fetch();
+            } catch (PDOException $exception) {
+                error_log('Request error: '.$exception->getMessage());
+                return false;
+            }
+            
+            return $result["total"];
+        }
+
         public static function getCount() {
             try {
                 $statement = Database::preparedQuery(
@@ -33,11 +65,11 @@
                 return false;
             }
             
-            return $result;
+            return $result["total"];
         }
 
         public static function getPageNumber(int $rows) {           
-            return ceil(Onduleur::getCount()["total"]/$rows);
+            return ceil(Onduleur::getCount()/$rows);
         }
 
         public static function getAll(int $page, int $rows) {

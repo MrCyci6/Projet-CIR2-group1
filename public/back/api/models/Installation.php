@@ -1,6 +1,102 @@
 <?php
 
     class Installation {
+        public static function getSurfaceTotal() {
+            try {
+                $statement = Database::preparedQuery(
+                    "SELECT SUM(surface) as surface FROM installation;",
+                    []
+                );
+
+                $result = $statement->fetch();
+            } catch (PDOException $exception) {
+                error_log('Request error: '.$exception->getMessage());
+                return false;
+            }
+            
+            return $result['surface'];
+        }
+
+        public static function getSurfaceAverage() {
+            try {
+                $statement = Database::preparedQuery(
+                    "SELECT SUM(surface) as surface FROM installation;",
+                    []
+                );
+
+                $result = $statement->fetch();
+            } catch (PDOException $exception) {
+                error_log('Request error: '.$exception->getMessage());
+                return false;
+            }
+            
+            return $result['surface'];
+        }
+
+        public static function getProductionTotal() {
+            try {
+                $statement = Database::preparedQuery(
+                    "SELECT SUM(production_pvgis) as production FROM installation;",
+                    []
+                );
+
+                $result = $statement->fetch();
+            } catch (PDOException $exception) {
+                error_log('Request error: '.$exception->getMessage());
+                return false;
+            }
+            
+            return $result['production'];
+        }
+
+        public static function getProductionAverage() {
+            try {
+                $statement = Database::preparedQuery(
+                    "SELECT AVG(production_pvgis) as production FROM installation;",
+                    []
+                );
+
+                $result = $statement->fetch();
+            } catch (PDOException $exception) {
+                error_log('Request error: '.$exception->getMessage());
+                return false;
+            }
+            
+            return $result['production'];
+        }
+        
+        public static function getPuissanceTotal() {
+            try {
+                $statement = Database::preparedQuery(
+                    "SELECT SUM(puissance_crete) as puissance FROM installation;",
+                    []
+                );
+
+                $result = $statement->fetch();
+            } catch (PDOException $exception) {
+                error_log('Request error: '.$exception->getMessage());
+                return false;
+            }
+            
+            return $result['puissance'];
+        }
+        
+        public static function getPuissanceAverage() {
+            try {
+                $statement = Database::preparedQuery(
+                    "SELECT AVG(puissance_crete) as puissance FROM installation;",
+                    []
+                );
+
+                $result = $statement->fetch();
+            } catch (PDOException $exception) {
+                error_log('Request error: '.$exception->getMessage());
+                return false;
+            }
+            
+            return $result['puissance'];
+        }
+
         public static function search(string $query, int $page, int $rows, $id_onduleur, $id_panneau, $code_departement, $annee) {
             try {
                 $statement = Database::preparedQuery(
