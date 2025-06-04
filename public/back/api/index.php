@@ -1,11 +1,11 @@
 <?php
 
-    require_once "models/Database.php";
-    require_once "models/Installation.php";
-    require_once "models/Installateur.php";
-    require_once "models/Panneau.php";
-    require_once "models/Onduleur.php";
-    require_once "models/Localite.php";
+    require_once "../models/Database.php";
+    require_once "../models/Installation.php";
+    require_once "../models/Installateur.php";
+    require_once "../models/Panneau.php";
+    require_once "../models/Onduleur.php";
+    require_once "../models/Localite.php";
     require_once "utils.php";
 
     if(!Database::getConnection()) {
@@ -33,6 +33,11 @@
         
         require $routes[$ressource];
     } else {
+        if($ressource == "") {
+            sendData("{\"success\": true, \"message\": \"Welcome to SolarSight-API\", \"version\": \"1.0.0\"}", 200);
+            exit();
+        }
+
         sendData("{\"success\": false, \"message\": \"Ressource not found\"}", 404);
         exit();    
     }
