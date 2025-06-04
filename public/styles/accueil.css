@@ -1691,6 +1691,10 @@ header.masthead .masthead-heading {
     text-decoration: none;
     color: black;
     font-size: 1.35em;
+    transition: color 0.2s;
+}
+.menutexts > a:hover{
+    color: #fff;
 }
 
 
@@ -1742,4 +1746,16 @@ footer{
 
 .blazes > p{
     font-size: 1.2rem;
+}
+
+.blazes > p{
+    font-size: 1.2rem;
+}
+.blazes > p:first-child {
+    font-weight: bold;
+    transition: transform 0.2s;
+}
+
+.blazes:hover {
+    transform: scale(1.10);
 }
