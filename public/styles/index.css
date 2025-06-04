@@ -1,87 +1,82 @@
-body{
-    padding: 0;
-    margin: 0;
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-
+body {
+  padding: 0;
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    "Helvetica Neue", Arial, sans-serif;
 }
 
-header{
-    width: auto;
-    height: 92px;
-    background-color: #489e69;
-    display: flex;
-    flex-direction:row ;
-    justify-content: space-between;
+header {
+  width: auto;
+  height: 92px;
+  background-color: #489e69;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
 }
 
-.menutexts{
-    padding-right: 5%;
-    display: grid;
-    grid-template-columns: auto auto auto;
-    gap: 1.5em;
-    align-items: center;
-    
+.menutexts {
+  padding-right: 5%;
+  display: grid;
+  grid-template-columns: auto auto auto;
+  gap: 1.5em;
+  align-items: center;
 }
 
-.menutexts > a{
-    text-decoration: none;
-    color: black;
-    font-size: 1.35em;
-    transition: color 0.2s;
+.menutexts > a {
+  text-decoration: none;
+  color: black;
+  font-size: 1.35em;
+  transition: color 0.2s;
 }
-.menutexts > a:hover{
-    color: #fff;
-}
-
-
-#logo{
-    height: inherit;
-    position: inherit;
-    padding-left: 1%;
+.menutexts > a:hover {
+  color: #fff;
 }
 
-
-footer{
-    background-color: #489e69;
-    position: absolute;
-    bottom: 0%;
-    width: 100%;
-    height: auto;
+#logo {
+  height: inherit;
+  position: inherit;
+  padding-left: 1%;
 }
 
-#container{
-    display: grid;
-    grid-template-rows: 2.5fr 4fr;
+footer {
+  background-color: #489e69;
+  position: absolute;
+  bottom: 0%;
+  width: 100%;
+  height: auto;
 }
 
-#footer-part1{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border-bottom: 1.5px whitesmoke solid;
-    margin-left: 2%;
-    margin-right: 2%;
+#container {
+  display: grid;
+  grid-template-rows: 2.5fr 4fr;
 }
 
-#footer-part2{
-    display: flex;
-    justify-content: space-evenly;
-    border-left: 0.75px whitesmoke solid;
-    border-right: 0.75px whitesmoke solid;
-    margin-top: 2%;
-    margin-bottom: 2%;
+#footer-part1 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-bottom: 1.5px whitesmoke solid;
+  margin-left: 2%;
+  margin-right: 2%;
 }
 
-.blazes{
-    display: grid;
-    grid-template-rows: 2em 2em ;
-    align-self: center;
-    align-items: center;
-    justify-items: center;
+#footer-part2 {
+  display: flex;
+  justify-content: space-evenly;
+  border-left: 0.75px whitesmoke solid;
+  border-right: 0.75px whitesmoke solid;
+  margin-top: 2%;
+  margin-bottom: 2%;
 }
 
-.blazes > p{
-    font-size: 1.2rem;
+.blazes {
+  display: grid;
+  grid-template-rows: 2em 2em;
+  align-self: center;
+  align-items: center;
+  justify-items: center;
 }
 
-
+.blazes > p {
+  font-size: 1.2rem;
+}
