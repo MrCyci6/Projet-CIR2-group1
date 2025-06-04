@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Carte des Installations</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- Leaflet CSS -->
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+    />
+    <link href="styles/carte.css" rel="stylesheet" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+    />
+  </head>
+  <body>
+    <header>
+      <img id="logo" src="./styles/ressources/logo.png" alt="logo" />
+      <div class="menutexts">
+        <a href="index.html"><i class="fa fa-home"></i> Accueil</a>
+        <a href="recherche.html"
+          ><i class="fa-solid fa-magnifying-glass"></i>Recherches</a
+        >
+        <a href="carte.html"> <i class="fa-solid fa-map"></i> Carte </a>
+      </div>
+    </header>
+
+    <h1>Carte des Installations Solaires</h1>
+    <div class="container">
+      <div class="filters">
+        <select id="annee">
+          <option value="">Année d'installation</option>
+        </select>
+
+        <select id="departement">
+          <option value="">Département</option>
+        </select>
+      </div>
+
+      <div id="map"></div>
+    </div>
+
+    <footer>
+      <div id="container">
+        <div id="footer-part1">
+          <p>Groupe 1 - CIR2 - 2025</p>
+        </div>
+        <div id="footer-part2">
+          <div class="blazes">
+            <p>Lecaillon Blot</p>
+            <p>Romain</p>
+          </div>
+          <div class="blazes">
+            <p>Le Mouel</p>
+            <p>Madeg</p>
+          </div>
+          <div class="blazes">
+            <p>Lenoir</p>
+            <p>Cyriac</p>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <!-- Leaflet JS -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script src="styles/carte.js"></script>
+  </body>
+</html>
