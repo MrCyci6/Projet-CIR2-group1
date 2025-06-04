@@ -8,7 +8,7 @@
             if(Database::$db != null)
                 return Database::$db;
             
-            $dsn = "pgsql:dbname=".DB_NAME.";host=".DB_SERVER.";port=".DB_PORT;
+            $dsn = "mysql:dbname=".DB_NAME.";host=".DB_SERVER.";port=".DB_PORT;
             $username = DB_USER;
             $password = DB_PASSWORD;
             try {
@@ -29,6 +29,7 @@
                 
                 $statement = $conn->prepare($request);
                 $statement->execute($params);
+                
                 return $statement;
             } catch(PDOException $e) {
                 error_log('Prepared query error: '.$e->getMessage());

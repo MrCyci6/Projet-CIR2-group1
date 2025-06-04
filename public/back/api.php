@@ -1,8 +1,11 @@
 <?php
 
     require_once "models/Database.php";
-    require_once "models/Reservation.php";
-    require_once "models/Conso.php";
+    require_once "models/Installation.php";
+    require_once "models/Installateur.php";
+    require_once "models/Panneau.php";
+    require_once "models/Onduleur.php";
+    require_once "models/Localite.php";
     require_once "utils.php";
 
     if(!Database::getConnection()) {
@@ -11,15 +14,23 @@
     }
 
     $requestMethod = strtolower($_SERVER['REQUEST_METHOD']);
-    $request = substr($_SERVER['PATH_INFO'], 7); // /hotel -> 7
+    $request = substr($_SERVER['PATH_INFO'], 1);
     $request = explode('/', $request);
     $ressource = array_shift($request);
     
     $routes = [
-        "test" => "controllers/test/".$requestMethod."Controller.php",
+        "installation" => "controllers/installation/".$requestMethod."Controller.php",
+        "installateur" => "controllers/installateur/".$requestMethod."Controller.php",
+        "panneau" => "controllers/panneau/".$requestMethod."Controller.php",
+        "onduleur" => "controllers/onduleur/".$requestMethod."Controller.php",
+        "localite" => "controllers/localite/".$requestMethod."Controller.php",
     ];
-
+    
     if(isset($routes[$ressource])) {
+        if($requestMethod == "put") {
+            parse_str(file_get_contents('php://input'), $_PUT);
+        }
+        
         require $routes[$ressource];
     } else {
         sendData("{\"success\": false, \"message\": \"Ressource not found\"}", 404);
