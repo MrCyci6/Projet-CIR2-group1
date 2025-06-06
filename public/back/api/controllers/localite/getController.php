@@ -41,7 +41,7 @@
         exit();
     }
 
-    $total = Localite::getCount()["total"] ?? 0;
+    $total = Localite::getCount() ?? 0;
     $pages = Localite::getPageNumber($rows) ?? 1;
 
     sendData("{\"success\": true, \"total\": $total, \"pages\": $pages, \"per_page\": $rows, \"data\": ".json_encode($data)."}", 200);

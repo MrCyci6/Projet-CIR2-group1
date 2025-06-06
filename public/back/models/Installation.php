@@ -1,6 +1,41 @@
 <?php
 
     class Installation {
+        public static function getByAnne() {
+            try {
+                $statement = Database::preparedQuery(
+                    "SELECT COUNT(id) as total, annee FROM installation GROUP BY annee;",
+                    []
+                );
+
+                $result = $statement->fetchAll(PDO::FETCH_ASSOC);
+            } catch (PDOException $exception) {
+                error_log('Request error: '.$exception->getMessage());
+                return false;
+            }
+            
+            return $result;
+        }
+        public static function getByRegion() {
+            try {
+                $statement = Database::preparedQuery(
+                    "SELECT COUNT(id) as total, r.code, r.denomination FROM installation i 
+                    INNER JOIN localite l ON l.code_insee=i.code_insee 
+                    INNER JOIN departement d ON d.code=l.code_departement 
+                    INNER JOIN region r ON r.code=d.code_region 
+                    GROUP BY r.code;",
+                    []
+                );
+
+                $result = $statement->fetchAll(PDO::FETCH_ASSOC);
+            } catch (PDOException $exception) {
+                error_log('Request error: '.$exception->getMessage());
+                return false;
+            }
+            
+            return $result;
+        }
+
         public static function getSurfaceTotal() {
             try {
                 $statement = Database::preparedQuery(
@@ -100,7 +135,7 @@
         public static function search(string $query, int $page, int $rows, $id_onduleur, $id_panneau, $code_departement, $annee) {
             try {
                 $statement = Database::preparedQuery(
-                    "SELECT i.id as id_installation, i.annee, pm.denomination as panneau, om.denomination as onduleur, l.cp, l.denomination as localite, d.denomination as departement, r.denomination as region FROM installation i 
+                    "SELECT i.*, om.denomination as onduleur, pm.denomination as panneau, l.denomination as localite FROM installation i 
                     INNER JOIN onduleur o ON o.id=i.id_onduleur 
                     INNER JOIN onduleur_modele om ON om.id=o.id_modele 
                     INNER JOIN panneau p ON p.id=i.id_panneau 
@@ -119,7 +154,7 @@
                     ($id_panneau != null ? "AND p.id=$id_panneau " : "").
                     ($code_departement != null ? "AND LOWER(d.code)=LOWER(?) " : "").
                     ($annee != null ? "AND i.annee=$annee " : "").
-                    " ORDER BY i.id ASC
+                    " ORDER BY i.annee DESC, i.mois DESC
                     LIMIT $rows OFFSET ".($page-1)*$rows.";",
                     (
                         $code_departement != null ?
@@ -217,8 +252,13 @@
         public static function getAll(int $page, int $rows) {
             try {
                 $statement = Database::preparedQuery(
-                    "SELECT * FROM installation
-                    ORDER BY annee DESC
+                    "SELECT i.*, om.denomination as onduleur, pm.denomination as panneau, l.denomination as localite from installation i 
+                    INNER JOIN localite l ON l.code_insee=i.code_insee 
+                    INNER JOIN onduleur o ON o.id=i.id_onduleur
+                    INNER JOIN onduleur_modele om ON o.id_modele=om.id 
+                    INNER JOIN panneau p ON p.id=i.id_panneau
+                    INNER JOIN panneau_modele pm ON p.id_modele=pm.id
+                    ORDER BY i.annee DESC, i.mois DESC
                     LIMIT $rows OFFSET ".($page-1)*$rows.";",
                     []
                 );

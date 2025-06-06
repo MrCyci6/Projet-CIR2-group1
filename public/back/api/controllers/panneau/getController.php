@@ -33,6 +33,20 @@
     // All panneau
     $rows = $_GET['rows'] ?? DEFAULT_ROWS;
     $page = $_GET['page'] ?? 1;
+    
+    if(isset($ressource) && $ressource == "marques") {
+        $data = Panneau::getAllMarque($page, $rows);
+        if(!is_array($data) && !$data) {
+            sendData("{\"success\": false, \"message\": \"Internal Server Error\"}", 500);
+            exit();
+        }
+
+        $total = Panneau::getMarqueCount()["total"] ?? 0;
+        $pages = Panneau::getMarquePageNumber($rows) ?? 1;
+
+        sendData("{\"success\": true, \"total\": $total, \"pages\": $pages, \"per_page\": $rows, \"data\": ".json_encode($data)."}", 200);
+        exit();
+    }
 
     $data = Panneau::getAll($page, $rows);
     if(!is_array($data) && !$data) {

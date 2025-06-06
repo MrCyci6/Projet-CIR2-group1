@@ -1,0 +1,11 @@
+:root {
+    background-color: #eeefef;
+}
+
+.selected {
+    background-color: var(--bs-success-bg-subtle);
+}
+
+.selected:hover {
+    background-color: var(--bs-success-bg-subtle);
+}

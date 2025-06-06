@@ -52,6 +52,29 @@
             return $result["total"];
         }
 
+        public static function getMarquePageNumber(int $rows) {           
+            return ceil(Panneau::getMarqueCount()/$rows);
+        }
+
+        public static function getAllMarque(int $page, int $rows) {
+            try {
+                $statement = Database::preparedQuery(
+                    "SELECT DISTINCT(m.denomination), m.id FROM panneau p 
+                    INNER JOIN marque m ON p.id_marque=m.id
+                    ORDER BY m.id ASC
+                    LIMIT $rows OFFSET ".($page-1)*$rows.";",
+                    []
+                );
+
+                $result = $statement->fetchAll(PDO::FETCH_ASSOC);
+            } catch (PDOException $exception) {
+                error_log('Request error: '.$exception->getMessage());
+                return false;
+            }
+            
+            return $result;
+        }
+
         public static function getCount() {
             try {
                 $statement = Database::preparedQuery(

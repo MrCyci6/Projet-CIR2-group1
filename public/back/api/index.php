@@ -6,6 +6,7 @@
     require_once "../models/Panneau.php";
     require_once "../models/Onduleur.php";
     require_once "../models/Localite.php";
+    require_once "../models/Departement.php";
     require_once "utils.php";
 
     if(!Database::getConnection()) {
@@ -24,6 +25,7 @@
         "panneau" => "controllers/panneau/".$requestMethod."Controller.php",
         "onduleur" => "controllers/onduleur/".$requestMethod."Controller.php",
         "localite" => "controllers/localite/".$requestMethod."Controller.php",
+        "departement" => "controllers/departement/".$requestMethod."Controller.php"
     ];
     
     if(isset($routes[$ressource])) {
