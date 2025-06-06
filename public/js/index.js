@@ -16,20 +16,21 @@ ajaxRequest("GET", "/back/api/installateur/stats", (response) => {
 ajaxRequest("GET", "/back/api/onduleur/stats", (response) => {
   const count = response.marque;
   document.querySelector(".onduleurs_stats").textContent =
-    `Il y a ${count} marques d'onduleurs différentes.`;
+    `${count}`;
 });
 
 // --- Texte : Stats panneaux ---
 ajaxRequest("GET", "/back/api/panneau/stats", (response) => {
-  const count = response.marque;
+  const count1 = response.marque;
   const count2 = response.total;
 
-  document.querySelector(".panneaux_stats").textContent =
-    `Il y a ${count} marques de panneaux photovoltaïques différentes.`;
+  document.querySelector(".marques_count").textContent =
+    `${count1}`;
 
   document.querySelector(".panneaux_count").textContent =
-    `Il y a ${count2} panneaux photovoltaïques d'installés.`;
+    `${count2}`;
 });
+
 
 // --- Graphique des installations par année (pie) ---
 ajaxRequest("GET", "/back/api/installation/stats", (response) => {

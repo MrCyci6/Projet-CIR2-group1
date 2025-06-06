@@ -56,6 +56,7 @@
             <!-- List -->
             <div class="card p-4 border-0 bt-3 shadow">
                 <!-- Table -->
+            <div class="table-responsive">
                 <table class="table table-striped table-hover">
                     <thead>
                         <tr>
@@ -88,6 +89,7 @@
                         <li class="page-item"><a class="page-link" href="installation&page=<?= $nextPage ?>">Suivant</a></li>
                     </ul>
                 </nav>  
+            </div>
             </div>
         </div>
     </div>
