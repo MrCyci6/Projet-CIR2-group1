@@ -61,7 +61,7 @@
                 $statement = Database::preparedQuery(
                     "SELECT DISTINCT(m.denomination), m.id FROM onduleur o 
                     INNER JOIN marque m ON o.id_marque=m.id
-                    ORDER BY m.id ASC
+                    ORDER BY RAND() ASC
                     LIMIT $rows OFFSET ".($page-1)*$rows.";",
                     []
                 );

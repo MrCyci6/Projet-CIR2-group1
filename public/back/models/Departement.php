@@ -6,7 +6,7 @@
             try {
                 $statement = Database::preparedQuery(
                     "SELECT * FROM departement
-                    ORDER BY code ASC
+                    ORDER BY RAND() ASC
                     LIMIT $rows OFFSET ".($page-1)*$rows.";",
                     []
                 );
