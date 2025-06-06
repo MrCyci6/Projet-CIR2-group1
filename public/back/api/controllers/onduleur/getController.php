@@ -2,7 +2,16 @@
 
     $ressource = array_shift($request);
     if(isset($ressource) && $ressource == "stats") {
+        $total = Onduleur::getCount();
+        $marqueTotal = Onduleur::getMarqueCount();
+        $modeleTotal = Onduleur::getModeleCount();
 
+        sendData("{
+            \"success\": true,
+            \"total\": $total,
+            \"marque\": $marqueTotal,
+            \"modele\": $modeleTotal
+        }", 200);
         exit();
     }
 
@@ -23,6 +32,20 @@
     // All Onduleur
     $rows = $_GET['rows'] ?? DEFAULT_ROWS;
     $page = $_GET['page'] ?? 1;
+    
+    if(isset($ressource) && $ressource == "marques") {
+        $data = Onduleur::getAllMarque($page, $rows);
+        if(!is_array($data) && !$data) {
+            sendData("{\"success\": false, \"message\": \"Internal Server Error\"}", 500);
+            exit();
+        }
+
+        $total = Onduleur::getMarqueCount()["total"] ?? 0;
+        $pages = Onduleur::getMarquePageNumber($rows) ?? 1;
+
+        sendData("{\"success\": true, \"total\": $total, \"pages\": $pages, \"per_page\": $rows, \"data\": ".json_encode($data)."}", 200);
+        exit();
+    }
 
     $data = Onduleur::getAll($page, $rows);
     if(!is_array($data) && !$data) {

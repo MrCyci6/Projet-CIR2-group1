@@ -133,3 +133,80 @@ body.dark-mode .menutexts > a:hover {
 body.dark-mode h1 {
   color: #fff;
 }
+
+/* Responsif */
+/* Header & Footer */
+
+@media (max-width: 700px) {
+  header {
+    flex-direction: column;
+    height: auto;
+    padding: 12px 0;
+    align-items: flex-start;
+  }
+
+  .menutexts {
+    grid-template-columns: 1fr;
+    gap: 0.7em;
+    padding-right: 2%;
+    width: 100%;
+    justify-items: flex-start;
+  }
+
+  .menutexts > a {
+    font-size: 1.1em;
+    padding: 4px 0;
+  }
+
+  #logo {
+    padding-left: 2%;
+    margin-bottom: 8px;
+    height: 48px;
+  }
+
+  footer {
+    font-size: 0.95em;
+    padding: 10px 0;
+  }
+
+  #footer-part1 {
+    flex-direction: column;
+    margin-left: 0;
+    margin-right: 0;
+    text-align: center;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 6px;
+  }
+
+  #footer-part2 {
+    flex-direction: column;
+    gap: 8px;
+    margin-top: 8px;
+    margin-bottom: 8px;
+    border-left: none;
+    border-right: none;
+    align-items: center;
+  }
+
+  .blazes {
+    grid-template-rows: 1.5em 1.5em;
+    margin-bottom: 4px;
+  }
+
+  /* Body */
+  .details,
+  .login-container,
+  .filters,
+  .table-container,
+  .container {
+    max-width: 98vw !important;
+    width: 98vw !important;
+    padding-left: 2vw !important;
+    padding-right: 2vw !important;
+    box-sizing: border-box;
+  }
+
+  table {
+    font-size: 0.95em;
+  }
+}

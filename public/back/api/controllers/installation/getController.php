@@ -2,7 +2,34 @@
 
     $ressource = array_shift($request);
     if(isset($ressource) && $ressource == "stats") {
+        $surfaceTotal = Installation::getSurfaceTotal(); // m²
+        $productionTotal = Installation::getProductionTotal(); // kWh
+        $puissanceTotal = Installation::getPuissanceTotal(); // kWc
+        
+        $surfaceAverage = Installation::getSurfaceAverage(); // m²
+        $productionAverage = Installation::getProductionAverage(); // kWh
+        $puissanceAverage = Installation::getPuissanceAverage(); // kWc
 
+        $byYear = Installation::getByAnne();
+        $byRegion = Installation::getByRegion();
+
+        sendData("{
+            \"success\": true, 
+            \"surface_m2\": {
+                \"total\": $surfaceTotal, 
+                \"average\": $surfaceAverage
+            }, 
+            \"production_kwh\": {
+                \"total\": $productionTotal, 
+                \"average\": $productionAverage
+            }, 
+            \"puissance_kwc\": {
+                \"total\": $puissanceTotal, 
+                \"average\": $puissanceAverage
+            }, 
+            \"by_year\": ".json_encode($byYear).", 
+            \"by_region\": ".json_encode($byRegion)."
+        }", 200);
         exit();
     }else if(isset($ressource) && $ressource == "search") {
         $page = $_GET['page'] ?? 1;
@@ -18,7 +45,14 @@
         }
 
         $query = $_GET['query'];
-        $data = Installation::search($query, $page, $rows, $id_onduleur, $id_panneau, $code_departement, $annee);
+        $data = Installation::search(
+            $query, 
+            $page, 
+            $rows, 
+            $id_onduleur == 0 ? null : $id_onduleur, 
+            $id_panneau == 0 ? null : $id_panneau, 
+            $code_departement == 0 ? null : $code_departement, 
+            $annee);
         if(!is_array($data) && !$data) {
             sendData("{\"success\": false, \"message\": \"Internal Server Error\"}", 500);
             exit();

@@ -2,7 +2,18 @@
 
     $ressource = array_shift($request);
     if(isset($ressource) && $ressource == "stats") {
+        $total = Localite::getCount();
+        $regionTotal = Localite::getRegionCount();
+        $departementTotal = Localite::getDepartementCount();
+        $paysTotal = Localite::getPaysCount();
 
+        sendData("{
+            \"success\": true,
+            \"localite\": $total,
+            \"region\": $regionTotal,
+            \"departement\": $departementTotal,
+            \"pays\": $paysTotal
+        }", 200);
         exit();
     }
 
@@ -30,7 +41,7 @@
         exit();
     }
 
-    $total = Localite::getCount()["total"] ?? 0;
+    $total = Localite::getCount() ?? 0;
     $pages = Localite::getPageNumber($rows) ?? 1;
 
     sendData("{\"success\": true, \"total\": $total, \"pages\": $pages, \"per_page\": $rows, \"data\": ".json_encode($data)."}", 200);

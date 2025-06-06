@@ -1,0 +1,361 @@
+body {
+  font-family: -apple-system, sans-serif;
+  background-color: #ffffff;
+  height: 100vh;
+  margin: 0;
+}
+
+#container {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+header {
+  width: 100%;
+  height: 92px;
+  background-color: #489e69;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.menutexts {
+  padding-right: 5%;
+  display: grid;
+  grid-template-columns: auto auto auto;
+  gap: 1.5em;
+  align-items: center;
+}
+
+.menutexts > a {
+  text-decoration: none;
+  color: black;
+  font-size: 1.35em;
+  transition: color 0.2s;
+}
+
+.menutexts > a:hover {
+  color: #fff;
+}
+
+#logo {
+  height: inherit;
+  padding-left: 1%;
+}
+
+.login-container {
+  background: #fff;
+  padding: 40px 32px 32px 32px;
+  margin: 48px auto;
+  border-radius: 18px;
+  box-shadow: 0 8px 32px rgba(72, 158, 105, 0.13), 0 2px 8px rgba(0, 0, 0, 0.06);
+  width: 340px;
+  max-width: 90vw;
+  text-align: center;
+  border: 2.2px solid #489e69;
+  transition: box-shadow 0.2s, transform 0.2s;
+  position: relative;
+}
+
+.login-container:hover {
+  box-shadow: 0 16px 40px rgba(72, 158, 105, 0.18),
+    0 4px 16px rgba(0, 0, 0, 0.1);
+  transform: translateY(-2px) scale(1.005);
+}
+
+.login-container button {
+  width: 100%;
+  padding: 0.8em;
+  background: linear-gradient(90deg, #489e69 60%, #36764f 100%);
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  font-size: 1.1em;
+  font-weight: bold;
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(72, 158, 105, 0.08);
+  transition: background 0.2s, transform 0.15s;
+  margin-top: 0.5em;
+}
+
+.login-container button:hover {
+  background: linear-gradient(90deg, #489e69 60%, #1d402b 100%);
+  transform: scale(1.03);
+}
+
+.login-container h1 {
+  color: #489e69;
+  margin-bottom: 0.2em;
+  font-size: 2.2em;
+  font-weight: bold;
+  letter-spacing: 1px;
+}
+
+.login-container .subtitle,
+.login-container p {
+  color: #555;
+  margin-top: 0;
+  margin-bottom: 1.5em;
+  font-size: 1em;
+  font-weight: 400;
+}
+
+#username:hover {
+  box-shadow: 0 0 8px rgba(72, 158, 105, 0.2);
+  color: #35714c;
+}
+
+#password:hover {
+  box-shadow: 0 0 8px rgba(72, 158, 105, 0.2);
+  color: #316a47;
+}
+
+h1 {
+  color: #4caf50;
+}
+
+.form-group {
+  position: relative;
+  margin-bottom: 1rem;
+  text-align: left;
+}
+
+label {
+  display: block;
+  margin-bottom: 0.5rem;
+  color: #333;
+}
+
+.input-icon {
+  position: absolute;
+  right: 1px;
+  top: 35px;
+  color: #489e69;
+  font-size: 1.1em;
+  pointer-events: none;
+}
+
+input[type="text"],
+input[type="password"] {
+  width: 100%;
+  padding: 0.5rem;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.form-options {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+  font-size: 0.9rem;
+}
+
+button {
+  width: 100%;
+  padding: 0.75rem;
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 1rem;
+}
+
+button:hover {
+  background-color: #45a049;
+}
+
+.signup-link {
+  margin-top: 1rem;
+  font-size: 0.9rem;
+}
+
+.signup-link a {
+  color: #4caf50;
+  text-decoration: none;
+}
+
+.signup-link a:hover {
+  text-decoration: underline;
+}
+
+footer {
+  background-color: #489e69;
+  width: 100%;
+  height: auto;
+}
+
+#footer-part1 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-bottom: 1.5px whitesmoke solid;
+  margin-left: 2%;
+  margin-right: 2%;
+}
+
+#footer-part2 {
+  display: flex;
+  justify-content: space-evenly;
+  border-left: 0.75px whitesmoke solid;
+  border-right: 0.75px whitesmoke solid;
+  margin-top: 2%;
+  margin-bottom: 2%;
+}
+
+.blazes {
+  display: grid;
+  grid-template-rows: 2em 2em;
+  align-self: center;
+  align-items: center;
+  justify-items: center;
+}
+
+.blazes > p {
+  font-size: 1.2rem;
+}
+
+.blazes > p:first-child {
+  font-weight: bold;
+  transition: transform 0.2s;
+}
+
+.blazes:hover {
+  transform: scale(1.1);
+}
+
+/* Mode nuit */
+body.dark-mode {
+  background: #181c1f;
+  color: #e0e0e0;
+}
+
+body.dark-mode .details {
+  background: #23272b;
+  color: #e0e0e0;
+  box-shadow: 0 0 16px rgba(72, 158, 105, 0.13);
+}
+
+body.dark-mode header,
+body.dark-mode footer {
+  background-color: #222;
+  color: #e0e0e0;
+}
+
+body.dark-mode .menutexts > a {
+  color: #e0e0e0;
+}
+
+body.dark-mode .menutexts > a:hover {
+  color: #8fd19e;
+}
+
+body.dark-mode h1 {
+  color: #fff;
+}
+
+body.dark-mode .login-container {
+  background: #23272b;
+  color: #e0e0e0;
+  border: 2.2px solid #489e69;
+}
+body.dark-mode .login-container label {
+  color: #fff;
+}
+
+/* Responsive */
+@media (max-width: 700px) {
+  /* header & Footer */
+  header {
+    flex-direction: column;
+    height: auto;
+    padding: 12px 0;
+    align-items: flex-start;
+  }
+
+  .menutexts {
+    grid-template-columns: 1fr;
+    gap: 0.7em;
+    padding-right: 2%;
+    width: 100%;
+    justify-items: flex-start;
+  }
+
+  .menutexts > a {
+    font-size: 1.1em;
+    padding: 4px 0;
+  }
+
+  #logo {
+    padding-left: 2%;
+    margin-bottom: 8px;
+    height: 48px;
+  }
+
+  footer {
+    font-size: 0.95em;
+    padding: 10px 0;
+  }
+
+  #footer-part1 {
+    flex-direction: column;
+    margin-left: 0;
+    margin-right: 0;
+    text-align: center;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 6px;
+  }
+
+  #footer-part2 {
+    flex-direction: column;
+    gap: 8px;
+    margin-top: 8px;
+    margin-bottom: 8px;
+    border-left: none;
+    border-right: none;
+    align-items: center;
+  }
+
+  .blazes {
+    grid-template-rows: 1.5em 1.5em;
+    margin-bottom: 4px;
+  }
+
+  /* Body */
+  body {
+    font-size: 0.98em;
+    overflow-x: hidden;
+  }
+
+  .login-container {
+    width: 98vw;
+    max-width: 98vw;
+    padding: 18px 6vw 14px 6vw;
+    margin: 18px 1vw;
+    border-radius: 10px;
+    min-width: 0;
+  }
+
+  .login-container h1 {
+    font-size: 1.4em;
+  }
+
+  .login-container .subtitle {
+    font-size: 0.98em;
+  }
+
+  .form-group input[type="text"],
+  .form-group input[type="password"] {
+    font-size: 1em;
+    padding: 0.5em 1em;
+  }
+
+  .input-icon {
+    right: 10px;
+    top: 36px;
+    font-size: 1em;
+  }
+}
