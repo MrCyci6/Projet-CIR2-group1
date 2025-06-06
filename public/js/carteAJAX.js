@@ -13,20 +13,16 @@ function shuffleArray(array) {
 
 ajaxRequest("GET", "/back/api/installation/stats", (response) => {
   if (response && response.by_year && Array.isArray(response.by_year)) {
-    // Extraire uniquement les années
     let annees = response.by_year.map((entry) => String(entry.annee));
 
-    // Trier du plus récent au plus vieux (décroissant)
     annees.sort((a, b) => b - a);
 
     const select = document.getElementById("annee");
 
-    // Vider les options sauf celle vide
     select
       .querySelectorAll("option:not([value=''])")
       .forEach((opt) => opt.remove());
 
-    // Ajouter les options avec uniquement l'année
     annees.forEach((annee) => {
       const option = document.createElement("option");
       option.value = annee;
