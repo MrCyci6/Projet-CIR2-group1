@@ -9,7 +9,7 @@ const charts = {
 ajaxRequest("GET", "/back/api/installateur/stats", (response) => {
   const count = response.total;
   document.querySelector(".installateurs_stats").textContent =
-    `Il y a ${count} marques d'installateurs différentes.`;
+    `${count}`;
 });
 
 // --- Texte : Stats onduleurs ---
