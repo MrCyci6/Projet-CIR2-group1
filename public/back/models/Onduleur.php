@@ -39,7 +39,7 @@
         public static function getMarqueCount() {
             try {
                 $statement = Database::preparedQuery(
-                    "SELECT COUNT(DISTINCT id_marque$) AS total FROM onduleur;",
+                    "SELECT COUNT(DISTINCT id_marque) AS total FROM onduleur;",
                     []
                 );
 

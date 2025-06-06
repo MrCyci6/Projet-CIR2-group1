@@ -2,9 +2,9 @@
 
     $ressource = array_shift($request);
     if(isset($ressource) && $ressource == "stats") {
-        $total = Onduleur::getCount();
-        $marqueTotal = Onduleur::getMarqueCount();
-        $modeleTotal = Onduleur::getModeleCount();
+        $total = Onduleur::getCount() ?? 0;
+        $marqueTotal = Onduleur::getMarqueCount() ?? 0;
+        $modeleTotal = Onduleur::getModeleCount() ?? 0;
 
         sendData("{
             \"success\": true,

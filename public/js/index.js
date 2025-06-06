@@ -1,136 +1,112 @@
-'use strict';
+"use strict";
 
-ajaxRequest('GET', '/back/api/installateur/stats', (response) => {
-    let count = response.total;
-    let message = `Il y a ${count} marques d'installateurs différentes.`;
-    document.querySelector('.installateurs_stats').textContent = message;
+const charts = {
+  years: null,
+  regions: null
+};
+
+// --- Texte : Stats installateurs ---
+ajaxRequest("GET", "/back/api/installateur/stats", (response) => {
+  const count = response.total;
+  document.querySelector(".installateurs_stats").textContent =
+    `Il y a ${count} marques d'installateurs différentes.`;
 });
 
-ajaxRequest('GET', '/back/api/onduleur/stats', (response) => {
-    let count = response.marque;
-    let message = `Il y a ${count} marques d'onduleurs différentes.`;
-    document.querySelector('.onduleurs_stats').textContent = message;
-
+// --- Texte : Stats onduleurs ---
+ajaxRequest("GET", "/back/api/onduleur/stats", (response) => {
+  const count = response.marque;
+  document.querySelector(".onduleurs_stats").textContent =
+    `Il y a ${count} marques d'onduleurs différentes.`;
 });
 
+// --- Texte : Stats panneaux ---
+ajaxRequest("GET", "/back/api/panneau/stats", (response) => {
+  const count = response.marque;
+  const count2 = response.total;
 
-ajaxRequest('GET', '/back/api/panneau/stats', (response) => {
-    let count = response.marque;
-    let message = `Il y a ${count} marques de panneaux photovoltaïques différentes.`;
-    let count2 = response.total;
-    let message2 = `Il y a ${count2} panneaux photovoltaïques d'installés.`;
-    document.querySelector('.panneaux_stats').textContent = message;
-    document.querySelector('.panneaux_count').textContent = message2;
+  document.querySelector(".panneaux_stats").textContent =
+    `Il y a ${count} marques de panneaux photovoltaïques différentes.`;
 
+  document.querySelector(".panneaux_count").textContent =
+    `Il y a ${count2} panneaux photovoltaïques d'installés.`;
 });
 
-ajaxRequest('GET', '/back/api/installation/stats', (response) => {
-    let dico_insta_per_year = {};
+// --- Graphique des installations par année (pie) ---
+ajaxRequest("GET", "/back/api/installation/stats", (response) => {
+  const dico = {};
 
-     response.by_year.forEach(entry => {
-        const annee = String(entry.annee); // On force en chaîne si besoin
-        const total = parseInt(entry.total); // On convertit en entier
+  response.by_year.forEach(entry => {
+    const annee = String(entry.annee);
+    const total = parseInt(entry.total);
+    dico[annee] = total;
+  });
 
-        dico_insta_per_year[annee] = total;
-    });
-    
-    console.log(dico_insta_per_year)
+  const ctx = document.querySelector(".chart_years");
 
-    const ctx = document.querySelector('.chart_years');
-    new Chart(ctx, {
-        type: 'pie',
-        data: {
-            labels: Object.keys(dico_insta_per_year),
-            datasets: [{
-                label: 'Nombre d\'installations',
-                data: Object.values(dico_insta_per_year),
-                borderWidth: 1
-            }]
-        },
-        options: {
-            plugins: {
-                legend: {
-                    display: true,
-                    position: 'bottom'
-                }
-            }
+  if (charts.years) charts.years.destroy();
+
+  charts.years = new Chart(ctx, {
+    type: "pie",
+    data: {
+      labels: Object.keys(dico),
+      datasets: [{
+        label: "Nombre d'installations",
+        data: Object.values(dico),
+        borderWidth: 1
+      }]
+    },
+    options: {
+      plugins: {
+        legend: {
+          display: true,
+          position: "bottom"
         }
-    });
+      }
+    }
+  });
 });
 
 
 
-ajaxRequest('GET', '/back/api/installation/stats', (response) => {
-    let dico_insta_per_year = {};
 
-     response.by_year.forEach(entry => {
-        const annee = String(entry.annee); // On force en chaîne si besoin
-        const total = parseInt(entry.total); // On convertit en entier
+// --- Graphique des installations par région (bar) ---
+ajaxRequest("GET", "/back/api/installation/stats", (response) => {
+  const dico = {};
 
-        dico_insta_per_year[annee] = total;
-    });
-    
-    console.log("............................................................................")
-    console.log(dico_insta_per_year)
 
-    const ctx = document.querySelector('.chart_years');
-    new Chart(ctx, {
-        type: 'pie',
-        data: {
-            labels: Object.keys(dico_insta_per_year),
-            datasets: [{
-                label: 'Nombre d\'installations',
-                data: Object.values(dico_insta_per_year),
-                borderWidth: 1
-            }]
-        },
-        options: {
-            plugins: {
-                legend: {
-                    display: true,
-                    position: 'bottom'
-                }
-            }
+  response.by_region.forEach(entry => {
+    const region = String(entry.denomination);
+    const total = parseInt(entry.total);
+    dico[region] = total;
+  });
+
+  const ctx = document.querySelector(".chart_regions");
+
+  if (charts.regions) charts.regions.destroy();
+
+  charts.regions = new Chart(ctx, {
+    type: "bar",
+    data: {
+      labels: Object.keys(dico),
+      datasets: [{
+        label: "Nombre d'installations",
+        data: Object.values(dico),
+        borderWidth: 1
+      }]
+    },
+    options: {
+      responsive: true,
+      plugins: {
+        legend: {
+          display: true,
+          position: "bottom"
         }
-    });
-});
-
-
-ajaxRequest('GET', '/back/api/installation/stats', (response) => {
-    let dico_insta_per_regions = {};
-
-     response.by_year.forEach(entry => {
-        const region = String(entry.denomination); // On force en chaîne si besoin
-        const total = parseInt(entry.total); // On convertit en entier
-
-        dico_insta_per_regions[region] = total;
-    });
-    
-    console.log(dico_insta_per_regions)
-
-    const ctx = document.querySelector('.chart_regions');
-    new Chart(ctx, {
-        type: 'bar',
-        data: {
-            labels: Object.keys(dico_insta_per_regions),
-            datasets: [{
-                label: 'Nombre d\'installations',
-                data: Object.values(dico_insta_per_regions),
-                borderWidth: 1
-            }]
-        },
-        options: {
-            plugins: {
-                legend: {
-                    display: true,
-                    position: 'bottom'
-                }
-            }
+      },
+      scales: {
+        y: {
+          beginAtZero: true
         }
-    });
+      }
+    }
+  });
 });
-
-
-
-
-
