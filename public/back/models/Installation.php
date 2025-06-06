@@ -135,7 +135,7 @@
         public static function search(string $query, int $page, int $rows, $id_onduleur, $id_panneau, $code_departement, $annee) {
             try {
                 $statement = Database::preparedQuery(
-                    "SELECT i.*, om.denomination as onduleur, pm.denomination as panneau, l.denomination as localite FROM installation i 
+                    "SELECT i.*, om.denomination as onduleur, pm.denomination as panneau, l.denomination as localite, d.code as code_departement FROM installation i 
                     INNER JOIN onduleur o ON o.id=i.id_onduleur 
                     INNER JOIN onduleur_modele om ON om.id=o.id_modele 
                     INNER JOIN panneau p ON p.id=i.id_panneau 
