@@ -6,10 +6,7 @@ const API = {
 const params = new URLSearchParams(document.location.search);
 
 const page = params.get("page") || 1;
-API.params.page = page;
-
 const rows = params.get("rows") || 20;
-API.params.rows = rows;
 
 const loadOnduleursMarques = (data, code) => {
     if(code != 200) return;
@@ -58,7 +55,7 @@ const loadInstallations = (data, code) => {
             <td class="text-center">${result['puissance_crete']}</td>
             <td class="ville-cell">${result['localite']} (${result['code_departement']})</td>
             <td class="text-center">
-                <a class="btn btn-primary">Voir</a>
+                <a href="details.html?id=${result['id']}" class="btn btn-primary">Voir</a>
             </td>
         </tr>`;
     }
@@ -76,10 +73,14 @@ const updateSearch = (event) => {
 }
 
 document.addEventListener('DOMContentLoaded', () => {
+    API.params.page = page;
+    API.params.rows = rows;
+
     ajaxRequest("GET", API.url + `/onduleur/marques`, loadOnduleursMarques, API.params);
     ajaxRequest("GET", API.url + `/panneau/marques`, loadPanneauxMarques, API.params);
     ajaxRequest("GET", API.url + `/departement`, loadDepartements, API.params);
 
+    // Default result when page is loaded
     // ajaxRequest("GET", API.url + `/installation`, loadInstallations, API.params);
 
     const form = document.getElementById("searchForm");

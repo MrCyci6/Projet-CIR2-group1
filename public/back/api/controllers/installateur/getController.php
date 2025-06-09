@@ -8,6 +8,13 @@
         exit();
     }
 
+    if(isset($_GET['id']) && !empty($_GET['id'])) {
+        $installateur = Installateur::get($_GET['id']);
+
+        sendData("{\"success\": true, \"data\": ".json_encode($installateur)."}", 200);
+        exit();
+    }
+
     $rows = $_GET['rows'] ?? DEFAULT_ROWS;
     $page = $_GET['page'] ?? 1;
 

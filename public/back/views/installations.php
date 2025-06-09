@@ -23,23 +23,11 @@
                 <form id="searchForm" method="GET">
                     <input type="hidden" name="hotel_id" value="<?= $hotelId ?>">
                     <div class="d-flex justify-content-between gap-3">
-                        <div class="input-group w-50">
+                        <div class="input-group w-75">
                             <input type="text" name="query" class="form-control" placeholder="Chercher une installation">
                             <button type="submit" id="search" class="btn btn-outline-success">Chercher</button>
                         </div>
-                        <div class="w-50 d-flex justify-content-center align-items-center gap-4">
-                            
-                            <select class="form-select" name="id_marque">
-                                <option value="0">Toutes les marques</option>
-                            </select>
-
-                            <select class="form-select" name="id_modele">
-                                <option value="0">Tous les modèles</option>
-                            </select>
-                            
-                            <select class="form-select" name="code_departement">
-                                <option value="0">Tous les départements</option>
-                            </select>
+                        <div class=" d-flex justify-content-center align-items-center gap-4">
                             
                             <select class="form-select" name="rows">
                                 <option value="20" <?= (isset($_GET['rows']) && $_GET['rows'] == 20) ? "selected" : "" ?>>20 lignes</option>
@@ -71,21 +59,21 @@
                 </table>
                 <nav class="d-flex justify-content-center">
                     <ul class="pagination d-flex">
-                        <li class="page-item"><a class="page-link" href="installation&page=<?= $prevPage ?>">Précédent</a></li>
+                        <li class="page-item"><a class="page-link">Précédent</a></li>
                         <li class="page-item"><a class="page-link">..</a></li>
-                        <li class="page-item"><a class="page-link" href="installation&page=1">1</a></li>
-                        <li class="page-item"><a class="page-link" href="installation&page=2">2</a></li>
-                        <li class="page-item"><a class="page-link" href="installation&page=3">3</a></li>
-                        <li class="page-item"><a class="page-link" href="installation&page=4">4</a></li>
-                        <li class="page-item"><a class="page-link" href="installation&page=5">5</a></li>
-                        <li class="page-item"><a class="page-link" href="installation&page=6">6</a></li>
-                        <li class="page-item"><a class="page-link" href="installation&page=7">7</a></li>
-                        <li class="page-item"><a class="page-link" href="installation&page=8">8</a></li>
-                        <li class="page-item"><a class="page-link" href="installation&page=9">9</a></li>
-                        <li class="page-item"><a class="page-link" href="installation&page=10">10</a></li>
-                        <li class="page-item"><a class="page-link" href="installation&page=10">11</a></li>
+                        <li class="page-item"><a class="page-link">1</a></li>
+                        <li class="page-item"><a class="page-link">2</a></li>
+                        <li class="page-item"><a class="page-link">3</a></li>
+                        <li class="page-item"><a class="page-link">4</a></li>
+                        <li class="page-item"><a class="page-link">5</a></li>
+                        <li class="page-item"><a class="page-link">6</a></li>
+                        <li class="page-item"><a class="page-link">7</a></li>
+                        <li class="page-item"><a class="page-link">8</a></li>
+                        <li class="page-item"><a class="page-link">9</a></li>
+                        <li class="page-item"><a class="page-link">10</a></li>
+                        <li class="page-item"><a class="page-link">11</a></li>
                         <li class="page-item"><a class="page-link">..</a></li>
-                        <li class="page-item"><a class="page-link" href="installation&page=<?= $nextPage ?>">Suivant</a></li>
+                        <li class="page-item"><a class="page-link">Suivant</a></li>
                     </ul>
                 </nav>  
             </div>
@@ -109,7 +97,6 @@
         <form action="users">
             <div class="modal-body border-0">
                 <input type="hidden" name="action" value="create">
-                <input type="hidden" name="hotel_id" value="<?= $hotelId ?>">
 
                 <label for="nom" class="form-label">Nom</label> 
                 <input type="text" class="form-control" id="nom" name="nom" value="" required>

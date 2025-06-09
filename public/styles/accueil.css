@@ -987,18 +987,7 @@ body.dark-mode .blazes > p {
     margin-bottom: 4px;
   }
 }
-<<<<<<< Updated upstream
-=======
 
-
-
-<<<<<<< Updated upstream
-=======
-
-
-
-
->>>>>>> Stashed changes
 #gros_container{
   display: flex;
   flex-direction: column;
@@ -1011,21 +1000,6 @@ body.dark-mode .blazes > p {
   gap: 10px;
   justify-content: center;
   padding-top: 2%;
-<<<<<<< Updated upstream
-
-}
-
-
-#stats_graph{
-  display: grid;
-  grid-template-columns: 2fr 1fr;
-  gap: 10px;
-  padding-top: 2%;
-  justify-content: center;
-
-}
-
-=======
 }
 
 
@@ -1054,5 +1028,3 @@ body.dark-mode .blazes > p {
     justify-content: center;
   }
 }
->>>>>>> Stashed changes
->>>>>>> Stashed changes

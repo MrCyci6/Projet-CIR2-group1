@@ -211,18 +211,24 @@
                 return false;
             }
             
-            return $result['total'];
+            return $result['total'] ?? 0;
         }
 
         public static function get(int $id) {
             try {
                 $statement = Database::preparedQuery(
-                    "SELECT * FROM installation
-                    WHERE id = $id;",
+                    "SELECT i.*, l.denomination as localite, om.denomination as onduleur, pm.denomination as panneau, d.denomination as departement, d.code as code_departement FROM installation i
+                    INNER JOIN localite l ON l.code_insee=i.code_insee
+                    INNER JOIN departement d ON d.code=l.code_departement
+                    INNER JOIN onduleur o ON o.id=i.id_onduleur
+                    INNER JOIN onduleur_modele om ON o.id_modele=om.id 
+                    INNER JOIN panneau p ON p.id=i.id_panneau
+                    INNER JOIN panneau_modele pm ON p.id_modele=pm.id
+                    WHERE i.id = $id;",
                     []
                 );
 
-                $result = $statement->fetch();
+                $result = $statement->fetch(PDO::FETCH_ASSOC);
             } catch (PDOException $exception) {
                 error_log('Request error: '.$exception->getMessage());
                 return false;
@@ -244,11 +250,11 @@
                 return false;
             }
             
-            return $result;
+            return $result["total"];
         }
 
         public static function getPageNumber(int $rows) {           
-            return ceil(Installation::getCount()["total"]/$rows);
+            return ceil(Installation::getCount()/$rows);
         }
 
         public static function getAll(int $page, int $rows) {
@@ -263,6 +269,58 @@
                     ORDER BY i.annee DESC, i.mois DESC
                     LIMIT $rows OFFSET ".($page-1)*$rows.";",
                     []
+                );
+
+                $result = $statement->fetchAll(PDO::FETCH_ASSOC);
+            } catch (PDOException $exception) {
+                error_log('Request error: '.$exception->getMessage());
+                return false;
+            }
+            
+            return $result;
+        }
+
+        public static function getAggregated($annee, $code_departement) {
+            try {
+                $statement = Database::preparedQuery(
+                    "SELECT d.code AS code_departement,
+                        d.denomination AS nom_departement,
+                        AVG(i.latitude) AS latitude,
+                        AVG(i.longitude) AS longitude,
+                        COUNT(i.id) AS nb_installations,
+                        SUM(i.production_pvgis) AS production_totale,
+                        SUM(i.puissance_crete) AS puissance_totale
+                    FROM installation i
+                    INNER JOIN localite l ON i.code_insee = l.code_insee
+                    INNER JOIN departement d ON l.code_departement = d.code".
+                    " WHERE 1=1 ".
+                    ($annee == null ? "" : "AND i.annee=CAST($annee as INT) ").
+                    ($code_departement == null ? "" : "AND d.code=? ").
+                    "GROUP BY d.code, d.denomination;",
+                    $code_departement != null ? [$code_departement] : []
+                );
+
+                $result = $statement->fetchAll(PDO::FETCH_ASSOC);
+            } catch (PDOException $exception) {
+                error_log('Request error: '.$exception->getMessage());
+                return false;
+            }
+            
+            return $result;
+        }
+
+        public static function getAggregatedByBox(array $bbox, $annee, $code_departement) {
+            try {
+                $statement = Database::preparedQuery(
+                    "SELECT i.id, i.latitude, i.longitude, i.puissance_crete, i.production_pvgis, l.denomination AS localite FROM installation i
+                    INNER JOIN localite l ON i.code_insee = l.code_insee
+                    INNER JOIN departement d ON d.code=l.code_departement
+                    WHERE i.latitude BETWEEN ".$bbox[1]." AND ".$bbox[3]."
+                    AND i.longitude BETWEEN ".$bbox[0]." AND ".$bbox[2].
+                    ($annee == null ? "" : " AND i.annee=CAST($annee as INT) ").
+                    ($code_departement == null ? "" : " AND d.code=? ").
+                    ";",
+                    $code_departement != null ? [$code_departement] : []
                 );
 
                 $result = $statement->fetchAll(PDO::FETCH_ASSOC);

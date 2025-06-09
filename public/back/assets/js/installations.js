@@ -6,7 +6,7 @@ const API = {
 };
 
 const params = new URLSearchParams(document.location.search);
-const page = params.get("page") || 1;
+let page = params.get("page") || 1;
 let rows = params.get("rows") || 20;
 
 const loadInstallations = (data) => {
@@ -33,17 +33,33 @@ const loadInstallations = (data) => {
 }
 
 const submitSearch = (event) => {
-        event.preventDefault();
+    event.preventDefault();
 
-        const form = event.target;
-        API.params.query = form.query.value || "";
-        API.params.id_marque = form.id_marque.value || 0;
-        API.params.id_modele = form.id_modele.value || 0;
-        API.params.code_departement = form.code_departement.value || 0;
-        API.params.rows = form.rows.value;
+    const form = event.target;
+    API.params.query = form.query.value || "";
+    API.params.rows = form.rows.value;
+    API.params.page = page;
 
-        ajaxRequest("GET", API.url + `/installation/search`, loadInstallations, API.params)
+    ajaxRequest("GET", API.url + `/installation/search`, loadInstallations, API.params)
+}
+
+const changePage = (event) => {
+    const pageText = event.target.textContent;
+    switch(pageText) {
+        case "Précédent":
+            page = page == 1 ? 1 : page-1;
+            break;
+        case "Suivant":
+            page = page+1;
+            break;
+        case "..":
+            break;
+        default:
+            page = pageText
     }
+
+    submitSearch({ target: document.getElementById("searchForm"), preventDefault: () => {} });
+}
 
 document.addEventListener("DOMContentLoaded", () => {
     API.params.page = page;
@@ -52,4 +68,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const form = document.getElementById("searchForm");
     form.addEventListener('submit', submitSearch);
+
+    const pages = document.querySelectorAll(".page-link");
+    pages.forEach(page => {
+        page.addEventListener("click", changePage);
+    })
 });
