@@ -132,7 +132,7 @@
             return $result['puissance'];
         }
 
-        public static function search(string $query, int $page, int $rows, $id_onduleur, $id_panneau, $code_departement, $annee) {
+        public static function search($query, int $page, int $rows, $id_onduleur, $id_panneau, $code_departement, $annee) {
             try {
                 $statement = Database::preparedQuery(
                     "SELECT i.*, om.denomination as onduleur, pm.denomination as panneau, l.denomination as localite, d.code as code_departement FROM installation i 
@@ -143,13 +143,14 @@
                     INNER JOIN localite l ON l.code_insee=i.code_insee
                     INNER JOIN departement d ON d.code=l.code_departement
                     INNER JOIN region r ON r.code=d.code_region
-                    WHERE (
+                    WHERE 1=1 ".
+                    ($query != null ? " AND (
                         LOWER(pm.denomination) LIKE LOWER(CONCAT('%', ?, '%'))
                         OR LOWER(om.denomination) LIKE LOWER(CONCAT('%', ?, '%'))
                         OR LOWER(d.denomination) LIKE LOWER(CONCAT('%', ?, '%'))
                         OR LOWER(r.denomination) LIKE LOWER(CONCAT('%', ?, '%'))
                         OR CAST(l.cp AS VARCHAR(255)) LIKE LOWER(CONCAT('%', ?, '%'))
-                    ) ".
+                    ) " : "").
                     ($id_onduleur != null ? "AND o.id=$id_onduleur " : "").
                     ($id_panneau != null ? "AND p.id=$id_panneau " : "").
                     ($code_departement != null ? "AND LOWER(d.code)=LOWER(?) " : "").
@@ -158,8 +159,8 @@
                     LIMIT $rows OFFSET ".($page-1)*$rows.";",
                     (
                         $code_departement != null ?
-                        [$query, $query, $query, $query, $query, $code_departement] :
-                        [$query, $query, $query, $query, $query]
+                        ($query != null ? [$query, $query, $query, $query, $query, $code_departement] : [$code_departement]) :
+                        ($query != null ? [$query, $query, $query, $query, $query] : [])
                     )
                 );
 
@@ -172,7 +173,7 @@
             return $result;
         }
         
-        public static function getSearchCount(string $query, int $page, int $rows, $id_onduleur, $id_panneau, $code_departement, $annee) {
+        public static function getSearchCount($query, int $page, int $rows, $id_onduleur, $id_panneau, $code_departement, $annee) {
             try {
                 $statement = Database::preparedQuery(
                     "SELECT COUNT(i.id) as total FROM installation i 
@@ -183,13 +184,14 @@
                     INNER JOIN localite l ON l.code_insee=i.code_insee
                     INNER JOIN departement d ON d.code=l.code_departement
                     INNER JOIN region r ON r.code=d.code_region
-                    WHERE (
+                    WHERE 1=1 ".
+                    ($query != null ? " AND (
                         LOWER(pm.denomination) LIKE LOWER(CONCAT('%', ?, '%'))
                         OR LOWER(om.denomination) LIKE LOWER(CONCAT('%', ?, '%'))
                         OR LOWER(d.denomination) LIKE LOWER(CONCAT('%', ?, '%'))
                         OR LOWER(r.denomination) LIKE LOWER(CONCAT('%', ?, '%'))
                         OR CAST(l.cp AS VARCHAR(255)) LIKE LOWER(CONCAT('%', ?, '%'))
-                    ) ".
+                    ) " : "").
                     ($id_onduleur != null ? "AND o.id=$id_onduleur " : "").
                     ($id_panneau != null ? "AND p.id=$id_panneau " : "").
                     ($code_departement != null ? "AND LOWER(d.code)=LOWER(?) " : "").
@@ -198,8 +200,8 @@
                     LIMIT $rows OFFSET ".($page-1)*$rows.";",
                     (
                         $code_departement != null ?
-                        [$query, $query, $query, $query, $query, $code_departement] :
-                        [$query, $query, $query, $query, $query]
+                        ($query != null ? [$query, $query, $query, $query, $query, $code_departement] : [$code_departement]) :
+                        ($query != null ? [$query, $query, $query, $query, $query] : [])
                     )
                 );
 

@@ -45,6 +45,11 @@ window.addEventListener("DOMContentLoaded", (event) => {
 
 const logo = document.getElementById("logo");
 
+let cards = document.getElementsByClassName("card border-success mb-3");
+
+
+
+
 // Appliquer le mode nuit au chargement si besoin
 if (localStorage.getItem("dark-mode") === "on") {
   document.body.classList.add("dark-mode");
@@ -59,8 +64,17 @@ logo.addEventListener("click", function () {
   if (isDark) {
     logo.src = "./styles/ressources/logoN.png";
     localStorage.setItem("dark-mode", "on");
-  } else {
+    for (let i = 0; i < cards.length; i++) {
+      cards[i].classList.toggle("text-bg-dark");
+    }
+  } 
+  else {
     logo.src = "./styles/ressources/logo.png";
     localStorage.setItem("dark-mode", "off");
+    for (let i = 0; i < cards.length; i++) {
+      cards[i].classList.toggle("text-bg-dark");
+    }
   }
+
 });
+

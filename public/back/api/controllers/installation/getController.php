@@ -38,13 +38,8 @@
         $id_panneau = $_GET['id_panneau'] ?? null;
         $code_departement = $_GET['code_departement'] ?? null;
         $annee = $_GET['annee'] ?? null;
+        $query = $_GET['query'] ?? null;
 
-        if(!isset($_GET['query']) || empty($_GET['query'])) {
-            sendData("{\"success\": false, \"message\": \"Bad Request\"}", 400);
-            exit();
-        }
-
-        $query = $_GET['query'];
         $data = Installation::search(
             $query, 
             $page, 
