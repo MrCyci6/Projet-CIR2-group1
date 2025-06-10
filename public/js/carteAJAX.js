@@ -11,7 +11,7 @@ function shuffleArray(array) {
 
 // get the years
 
-ajaxRequest("GET", "/back/api/installation/stats", (response) => {
+ajaxRequest("GET", "back/api/installation/stats", (response) => {
   if (response && response.by_year && Array.isArray(response.by_year)) {
     let annees = response.by_year.map((entry) => String(entry.annee));
 
