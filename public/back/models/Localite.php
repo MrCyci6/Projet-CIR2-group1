@@ -96,7 +96,7 @@
                     INNER JOIN departement d ON d.code=l.code_departement 
                     INNER JOIN region r ON r.code=d.code_region 
                     INNER JOIN pays p ON p.id=r.id_pays
-                    ORDER BY l.code_insee ASC
+                    ORDER BY RAND() ASC
                     LIMIT $rows OFFSET ".($page-1)*$rows.";",
                     []
                 );

@@ -42,7 +42,7 @@
             try {
                 $statement = Database::preparedQuery(
                     "SELECT * FROM installateur
-                    ORDER BY id DESC
+                    ORDER BY RAND() DESC
                     LIMIT $rows OFFSET ".($page-1)*$rows.";",
                     []
                 );

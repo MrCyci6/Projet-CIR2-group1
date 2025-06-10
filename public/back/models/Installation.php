@@ -155,7 +155,7 @@
                     ($id_panneau != null ? "AND p.id=$id_panneau " : "").
                     ($code_departement != null ? "AND LOWER(d.code)=LOWER(?) " : "").
                     ($annee != null ? "AND i.annee=$annee " : "").
-                    " ORDER BY i.annee DESC, i.mois DESC
+                    " ORDER BY i.id DESC
                     LIMIT $rows OFFSET ".($page-1)*$rows.";",
                     (
                         $code_departement != null ?
@@ -349,7 +349,7 @@
         public static function add(
             int $puissance_crete, int $surface, int $pente, int $pente_optimum, int $orientation, int $orientation_optimum, 
             int $production_pvgis, string $political, int $annee, int $mois, float $latitude, float $longitude, 
-            int $code_insee, int $id_installateur, int $id_panneau, int $nb_panneau, int $id_onduleur, int $nb_onduleur
+            int $code_insee, $id_installateur, int $id_panneau, int $nb_panneau, int $id_onduleur, int $nb_onduleur
         ) {
             
             try {
@@ -357,8 +357,8 @@
                     "INSERT INTO installation(puissance_crete, surface, pente, pente_optimum, orientation, orientation_optimum, production_pvgis, political,
                     annee, mois, latitude, longitude, code_insee, id_installateur, id_panneau, nb_panneau, id_onduleur, nb_onduleur)
                     VALUES ($puissance_crete, $surface, $pente, $pente_optimum, $orientation, $orientation_optimum, $production_pvgis, ?,
-                    $annee, $mois, $latitude, $longitude, $code_insee, $id_installateur, $id_panneau, $nb_panneau, $id_onduleur, $nb_onduleur);",
-                    [$political]
+                    $annee, $mois, $latitude, $longitude, $code_insee, ".($id_installateur == null ? "NULL" : "CAST($id_installateur as INT)").", $id_panneau, $nb_panneau, $id_onduleur, $nb_onduleur);",
+                    [$policital]
                 );
             } catch (PDOException $exception) {
                 error_log('Request error: '.$exception->getMessage());
