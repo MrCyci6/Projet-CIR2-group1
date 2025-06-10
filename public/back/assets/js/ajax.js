@@ -22,28 +22,10 @@ function ajaxRequest(type, url, callback, data = null) {
         switch (xhr.status) {
             case 200:
             case 201:
-                callback(JSON.parse(xhr.responseText));
-                break;
             default:
-                httpErrors(xhr.status);
+                callback(JSON.parse(xhr.responseText), xhr.status);
         }
     };
 
     xhr.send(data);
-}
-
-function httpErrors(errorCode) {
-    const messages = {
-        400: 'Requête incorrecte',
-        401: 'Authentifiez vous',
-        403: 'Accès refusé',
-        404: 'Page non trouvée',
-        500: 'Erreur interne du serveur',
-        503: 'Service indisponible'
-    };
-
-    if (errorCode in messages) {
-        $('#errors').html('<i class="fa fa-exclamation-circle"></i> <strong>' + messages[errorCode] + '</strong>');
-        $('#errors').show();
-    }
 }
