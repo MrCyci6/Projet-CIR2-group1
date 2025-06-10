@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Login - SolarSight</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+    />
+    <link rel="stylesheet" href="assets/styles/login.css" />
+  </head>
+  <body>
+    <header>
+      <img id="logo" src="assets/styles/ressources/logo.png" alt="logo" />
+      <div class="menutexts">
+        <a href="index.html"><i class="fa fa-home"></i> Accueil</a>
+        <a href="recherche.html"
+          ><i class="fa-solid fa-magnifying-glass"></i>Recherches</a
+        >
+        <a href="carte.html"> <i class="fa-solid fa-map"></i> Carte </a>
+      </div>
+    </header>
+    <div>
+      <br />
+      <br />
+      <br />
+
+      <div class="login-container">
+        <h1>Bienvenue</h1>
+        <p class="subtitle">Connectez-vous à votre compte</p>
+
+        <form action="login" method="POST">
+          <div class="form-group">
+            <label for="username">Nom d'utilisateur</label>
+            <input
+              type="text"
+              id="username"
+              name="username"
+              placeholder="Entrez votre nom d'utilisateur"
+            />
+            <i class="fa-solid fa-user input-icon"></i>
+          </div>
+          <div class="form-group">
+            <label for="password">Mot de passe</label>
+            <input
+              type="password"
+              id="password"
+              name="password"
+              placeholder="Entrez votre mot de passe"
+            />
+            <i class="fa-solid fa-lock input-icon"></i>
+          </div>
+
+          <button type="submit" id="loginButton">Se connecter</button>
+        </form>
+      </div>
+    </div>
+
+    <br />
+    <br />
+    <br />
+
+    <footer>
+      <div id="container">
+        <div id="footer-part1">
+          <p>Groupe 1 - CIR2 - 2025</p>
+        </div>
+        <div id="footer-part2">
+          <div class="blazes">
+            <p>Lecaillon Blot</p>
+            <p>Romain</p>
+          </div>
+          <div class="blazes">
+            <p>Le Mouel</p>
+            <p>Madeg</p>
+          </div>
+          <div class="blazes">
+            <p>Lenoir</p>
+            <p>Cyriac</p>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <script src="js/login.js"></script>
+  </body>
+</html>

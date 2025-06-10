@@ -367,6 +367,32 @@
 
             return true;
         }
+
+        public static function update(
+            int $id,
+            int $puissance_crete, int $surface, int $pente, int $pente_optimum, int $orientation, int $orientation_optimum, 
+            int $production_pvgis, string $political, int $annee, int $mois, float $latitude, float $longitude, 
+            int $code_insee, $id_installateur, int $id_panneau, int $nb_panneau, int $id_onduleur, int $nb_onduleur
+        ) {
+            
+            try {
+                Database::preparedQuery(
+                    "UPDATE installation 
+                    SET puissance_crete=$puissance_crete, surface=$surface, pente=$pente, 
+                    pente_optimum=$pente_optimum, orientation=$orientation, orientation_optimum=$orientation_optimum, 
+                    production_pvgis=$production_pvgis, political=?, annee=$annee, mois=$mois, 
+                    latitude=$latitude, longitude=$longitude, code_insee=$code_insee, ".($id_installateur == null ? "" : "id_installateur=CAST($id_installateur as INT), ")." 
+                    id_panneau=$id_panneau, nb_panneau=$nb_panneau, id_onduleur=$id_onduleur, nb_onduleur=$nb_onduleur 
+                    WHERE id=$id;",
+                    [$political]
+                );
+            } catch (PDOException $exception) {
+                error_log('Request error: '.$exception->getMessage());
+                return false;
+            }
+
+            return true;
+        }
     }
 
 ?>

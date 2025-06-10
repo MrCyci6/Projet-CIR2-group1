@@ -82,7 +82,7 @@
 </div>
 </div>
 
-<!-- Create user -->
+<!-- Create installation -->
 <div class="modal fade" id="newInstallationModal" tabindex="-1" aria-labelledby="newInstallationModal" aria-hidden="true">
 <div class="modal-dialog modal-dialog-centered">
     <div class="modal-content p-2">
