@@ -31,20 +31,16 @@
             \"by_region\": ".json_encode($byRegion)."
         }", 200);
         exit();
-    }else if(isset($ressource) && $ressource == "search") {
+
+    } else if(isset($ressource) && $ressource == "search") {
         $page = $_GET['page'] ?? 1;
         $rows = $_GET['rows'] ?? DEFAULT_ROWS;
         $id_onduleur = $_GET['id_onduleur'] ?? null;
         $id_panneau = $_GET['id_panneau'] ?? null;
         $code_departement = $_GET['code_departement'] ?? null;
         $annee = $_GET['annee'] ?? null;
+        $query = $_GET['query'] ?? null;
 
-        if(!isset($_GET['query']) || empty($_GET['query'])) {
-            sendData("{\"success\": false, \"message\": \"Bad Request\"}", 400);
-            exit();
-        }
-
-        $query = $_GET['query'];
         $data = Installation::search(
             $query, 
             $page, 
@@ -62,6 +58,22 @@
         $pages = ceil($total/$rows);
 
         sendData("{\"success\": true, \"total\": $total, \"pages\": $pages, \"per_page\": $rows, \"data\": ".json_encode($data)."}", 200);
+        exit();
+    } else if(isset($ressource) && $ressource == "aggregated") {
+        $annee = $_GET['annee'] ?? null;
+        $code_departement = $_GET['code_departement'] ?? null;
+
+
+        if(isset($_GET['bbox'])) {
+            $bbox = explode(',', $_GET['bbox']);
+            
+            sendData("{\"success\": true, \"data\": ".
+            json_encode(Installation::getAggregatedByBox($bbox, $annee == 0 ? null : $annee, $code_departement == 0 ? null : $code_departement)).
+            "}", 200);
+            exit();
+        }
+
+        sendData("{\"success\": true, \"data\": ".json_encode(Installation::getAggregated($annee == 0 ? null : $annee, $code_departement == 0 ? null : $code_departement))."}", 200);
         exit();
     }
 
@@ -91,7 +103,7 @@
         exit();
     }
 
-    $total = Installation::getCount()["total"] ?? 0;
+    $total = Installation::getCount() ?? 0;
     $pages = Installation::getPageNumber($rows) ?? 1;
 
     sendData("{\"success\": true, \"total\": $total, \"pages\": $pages, \"per_page\": $rows, \"data\": ".json_encode($data)."}", 200);

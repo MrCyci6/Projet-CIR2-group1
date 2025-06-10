@@ -22,7 +22,7 @@
     if(
         !isset($puissance_crete) || !isset($surface) || !isset($pente) || !isset($pente_optimum) || !isset($orientation) || !isset($orientation_optimum)
         || !isset($production_pvgis) || !isset($political) || !isset($annee) || !isset($mois) || !isset($latitude) || !isset($longitude)
-        || !isset($code_insee) || !isset($id_installateur) || !isset($id_panneau) || !isset($nb_panneau) || !isset($id_onduleur) || !isset($nb_onduleur)
+        || !isset($code_insee) || !isset($id_panneau) || !isset($nb_panneau) || !isset($id_onduleur) || !isset($nb_onduleur)
     ) {    
         sendData("{\"success\": false, \"message\": \"Bad Request\"}", 400);
         exit();

@@ -101,7 +101,7 @@
                     "SELECT p.id, pm.id as id_modele, pm.denomination as modele, m.id as id_marque, m.denomination as marque FROM panneau p 
                     INNER JOIN panneau_modele pm ON pm.id=p.id_modele 
                     INNER JOIN marque m ON m.id=p.id_marque
-                    ORDER BY p.id ASC
+                    ORDER BY RAND() ASC
                     LIMIT $rows OFFSET ".($page-1)*$rows.";",
                     []
                 );

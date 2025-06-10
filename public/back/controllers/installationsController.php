@@ -1,5 +1,10 @@
 <?php
 
+    if(!Session::isUserLogged()) {
+        header("Location: login");
+        exit();
+    }
+
     $selected = "installations";
     
     require 'views/components/header.php';

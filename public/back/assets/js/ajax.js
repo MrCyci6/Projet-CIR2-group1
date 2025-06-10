@@ -1,7 +1,7 @@
 'use strict';
 
 function ajaxRequest(type, url, callback, data = null) {    
-    if(data && type.toLowerCase() == "get") {
+    if(type.toLowerCase() != "put") {
         if(data instanceof Object) {
             url += "?";
             for(const key in data) {
@@ -12,6 +12,14 @@ function ajaxRequest(type, url, callback, data = null) {
         } else if(data instanceof String) {
             url += `?${data}`;
         }        
+    } else if (type.toLowerCase() == "put") {
+        let newData = ""
+        for(const key in data) {
+            const value = data[key];
+            newData += `${key}=${value}&`;
+        }
+        newData = newData.substring(0, newData.length-1);
+        data = newData;
     }
 
     const xhr = new XMLHttpRequest();
@@ -23,6 +31,7 @@ function ajaxRequest(type, url, callback, data = null) {
             case 200:
             case 201:
             default:
+                // console.log(xhr.responseText)
                 callback(JSON.parse(xhr.responseText), xhr.status);
         }
     };
